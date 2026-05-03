@@ -1,0 +1,277 @@
+<<<<<<< HEAD
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #fff;
+    color: #333;
+}
+
+.checkout-container {
+    width: 80%;
+    margin: 30px auto;
+}
+
+/* User Info */
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+.user-info .username { font-weight: bold; color: #5a1a1a; }
+.user-info .address { color: #555; }
+.user-info .edit-link { color: #5a1a1a; font-weight: bold; text-decoration: none; }
+.user-info .edit-link:hover { text-decoration: underline; }
+
+/* Product Card Box */
+.product-card {
+    background: #722F37;   /* full maroon */
+    color: #fff;           /* white text */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle shadow */
+}
+
+.product-card h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.policy, .delivery {
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.qty-btn {
+    background: #fff;
+    color: #5a1a1a;
+    border: none;
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.qty-btn:hover {
+    background: #ddd;
+}
+
+.quantity-selector input {
+    width: 40px;
+    text-align: center;
+    margin: 0 8px;
+    border: none;
+    background: #fff;
+    color: #5a1a1a;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* Order Detail */
+.order-detail {
+    border: 1px solid #ccc;
+    padding: 25px;
+    border-radius: 6px;
+    background: #fafafa;
+    margin-top: 20px;
+}
+.order-detail h3 {
+    margin: 0 0 15px;
+    font-size: 20px;
+    color: #5a1a1a;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+.order-detail table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+.order-detail td { padding: 10px 0; font-size: 16px; color: #333; }
+.order-detail td:first-child { text-align: left; }
+.order-detail td:last-child { text-align: right; }
+.order-detail tr.divider td { border-bottom: 1px solid #ddd; padding-bottom: 12px; }
+.order-detail tr.total td { font-weight: bold; font-size: 18px; color: #000; padding-top: 12px; }
+
+/* Button aligned right */
+.btn {
+    background: #5a1a1a;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    float: right;
+}
+.btn:hover { background: #7a2a2a; }
+/* Container Layout */
+.checkout-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.checkout-header {
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    text-decoration: none;
+    font-size: 24px;
+    color: #000;
+}
+
+/* Address Styling */
+.address-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.address-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.location-icon {
+    font-size: 24px;
+}
+
+.edit-link {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+/* Maroon Product Card */
+.product-card {
+    background-color: #7a3036;
+    color: white;
+    padding: 25px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
+
+.product-info-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.product-img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+.product-text h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+}
+
+.price-val {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+/* Fix for the Quantity Box */
+.quantity-box {
+    display: inline-flex;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    border-radius: 8px;
+    gap: 10px;
+    float: right;
+}
+
+.qty-btn {
+    width: 25px;
+    height: 35px;
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#qty-number {
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.product-guarantee {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Order Details */
+.order-details h3 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.divider {
+    border: 0;
+    border-top: 2px solid #000;
+    margin: 15px 0;
+}
+
+.total-row {
+    font-size: 1.3rem;
+}
+
+/* Proceed Button */
+.action-container {
+    text-align: right;
+    margin-top: 30px;
+}
+
+.proceed-btn {
+    background-color: #7a3036;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.proceed-btn:hover {
+    background-color: #5a2328;
+}
+

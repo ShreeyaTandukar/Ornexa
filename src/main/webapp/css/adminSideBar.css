@@ -1,0 +1,223 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --maroon: #5D262B;
+    --dark-maroon: #441C20;
+    --bg-light: #F4F4F1;
+    --sidebar-white: #FDFDFB;
+    --text-muted: #8E8E8E;
+    --border-color: #ECECEC;
+}
+
+body {
+    background-color: var(--bg-light);
+    min-height: 100vh;
+}
+
+
+.admin-layout {
+    display: flex; 
+    width: 100%;
+    align-items: stretch;
+}
+
+
+.sidebar {
+    width: 260px;
+    background: var(--sidebar-white);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+    flex-shrink: 0;
+    min-height: 100vh;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sidebar-logo {
+    width: 120px;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+.brand-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--maroon);
+    display: block;
+    letter-spacing: 1px;
+}
+
+.brand-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-menu {
+    flex-grow: 0;
+}
+
+.nav-menu a {
+    text-decoration: none; 
+    color: inherit;       
+    display: flex;       
+    align-items: center;
+}
+.nav-menu .nav-item {
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    transition: 0.2s ease;
+}
+
+.nav-menu .nav-item i {
+    width: 16px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.nav-menu .nav-item.active {
+    background: #FFF;
+    color: var(--maroon);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.add-product-btn {
+    margin: 30px 0;
+    padding: 15px;
+    background: var(--maroon);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sidebar-footer {
+    margin-top: auto; 
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.footer-item {
+    font-size: 11px;
+    padding: 10px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+/* BACKDROP */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+/* MODAL BOX */
+.modal-content {
+    background: #fff;
+    margin: 8% auto;
+    padding: 20px;
+    width: 40%;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* CLOSE BUTTON */
+.modal-content span {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+/* animation */
+@keyframes pop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+.close {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* =========================
+   INPUT FIELDS
+========================= */
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+.modal-content input:focus {
+    border-color: #5D262B;
+}
+
+/* =========================
+   BUTTON INSIDE MODAL
+========================= */
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #5D262B;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background: #441C20;
+}

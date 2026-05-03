@@ -1,0 +1,211 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    overflow: hidden; /* Prevents scrollbars from background video */
+}
+
+/* Background Video */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    object-fit: cover;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45); /* Muted overlay to match image vibe */
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+
+/* Welcome Text Styling */
+.welcome-text {
+    color: white;
+    max-width: 500px;
+    margin-left: -80px;
+}
+
+.welcome-text h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 10px;
+    
+}
+
+.welcome-text p {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+}
+
+/* Glassmorphism Form Card */
+.form-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-card {
+    /* Muted grey-white transparency */
+    background: rgba(255, 255, 255, 0.55); 
+    /* This creates the blur effect */
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    
+    padding: 50px 40px;
+    border-radius: 25px;
+    width: 600px;
+    height: 650px;
+    margin-left: 500px;
+    
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #111;
+    margin-top: -28px;
+    text-align: left;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+/* Profile Upload Section */
+.profile-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circle {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.circle:hover {
+    transform: scale(1.05);
+}
+
+.profile-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #222;
+    text-transform: uppercase;
+}
+
+/* Inputs Grid */
+.input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 20px;
+    text-align: left;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: #111;
+    text-transform: uppercase;
+    text-align:left;
+}
+
+input {
+    padding: 12px 15px;
+    border: none;
+    background: rgba(255, 255, 255, 0.7); /* Soft input transparency */
+    border-radius: 6px;
+    outline: none;
+    font-size: 0.85rem;
+    color: #000;
+}
+
+input::placeholder {
+    color: #777;
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 65%;
+    padding: 14px;
+    background: #622e2f; /* Matching the dark burgundy/brown color */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.btn-submit:hover {
+    background: #4a2122;
+    transform: translateY(-1px);
+}
+
+/* Footer Login Link */
+.login-footer {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #111;
+}
+
+.login-footer a {
+    color: #622e2f;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}

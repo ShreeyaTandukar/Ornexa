@@ -1,0 +1,63 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+    padding: 0;   /* remove extra body padding */
+}
+
+.main {
+    margin: 20px auto;   /* smaller vertical gap */
+    padding: 30px;       /* inner spacing for readability */
+    max-width: 700px;
+    /*background-color: #fafafa;*/
+   /* border: 1px solid #ccc;*/
+    /*border-radius: 6px;*/
+    text-align: center;
+}
+
+.main h1, .main p {
+    margin-top: 0;       /* remove default top margin */
+}
+
+/* Form styling */
+form {
+    margin-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;          /* center form inside main */
+    text-align: left;            /* keep labels/inputs aligned left */
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #EDDEDC;
+}
+
+/* Centered Submit button */
+form button {
+    display: block;
+    margin: 20px auto 0 auto;
+    background-color: #4a1f2c;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+form button:hover {
+    background-color: #6a2f44;
+}

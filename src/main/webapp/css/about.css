@@ -1,0 +1,145 @@
+/* body */
+body {
+    background-color: #FAF9F6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+
+.mainSection {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* About Ornexa */
+.mainTitle {
+    font-size: 44px;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.subTitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* The wrapper paragraphs */
+.paragraph p {
+    text-align: left;
+    max-width: 950px;
+    margin: 0 auto 30px auto; /* Space between each <p> */
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+/* slogan */
+.slogan {
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 60px; 
+    margin-bottom: 140px; /
+}
+
+/* MEMBERS HEADING */
+.memberSectionHeading {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 60px;
+}
+
+/* THE GRID (3 TOP, 2 BOTTOM)  */
+.members {
+    display: flex;
+    flex-wrap: wrap;         
+    justify-content: center;  
+    gap: 60px;               
+}
+
+.memberCard {
+    position: relative;      
+    flex: 0 0 280px;         
+    text-align: center;
+    margin-bottom: 60px;
+    z-index: 5;
+    transition: transform 0.3s ease;
+}
+
+/* THE BLUR EFFECT  */
+.pageBlur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 50; 
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease;
+    pointer-events: none; 
+}
+
+/* Activates blur effect when card is hovered */
+body:has(.memberCard:hover) .pageBlur {
+    opacity: 1;
+    visibility: visible;
+}
+
+.memberCard:hover {
+    z-index: 100; /* Brings the active card in front of the blur */
+}
+
+/* --- 5. IMAGE & POPUP --- */
+.memberPhoto {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    background-color: #e6e6e6;
+}
+
+.infoPopup {
+    position: absolute;      /* Floats the box next to the photo */
+    top: 0;
+    left: 100%;  
+    transform: translateX(-25%);
+    margin-left: -10px;      
+    width: 270px;
+    background-color: #ffffff;
+    padding: 25px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    text-align: left;
+    
+    opacity: 0;
+    visibility: hidden;
+    z-index: 110;            
+    transition: all 0.3s ease;
+}
+
+.memberCard:hover .infoPopup {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* POPUP TEXT STYLES */
+.hoverTitle { 
+	font-size: 17px;
+	margin-bottom: 12px;
+	font-weight: bold; 
+	color: #000; 
+}
+.hoverDescription { 
+	font-size: 14px; 
+	color: #5d5d5d; 
+	line-height: 1.5; 
+	margin-bottom: 18px; 
+}
+

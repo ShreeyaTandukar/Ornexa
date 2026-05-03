@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+.header_section {
+  background-color: #722F37;
+  padding: 10px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* CONTAINER */
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo {
+  height: 65px;
+}
+
+/* NAV LINKS */
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #F8E6C9;
+  font-size: 17px;
+  transition: 0.3s;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #1abc9c;
+}
+
+.active .nav-link {
+  border-bottom: 2px solid #F8E6C9;
+}
+
+/* RIGHT SIDE */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* SEARCH */
+.search-container {
+  position: relative;
+}
+
+.search-box {
+  padding: 7px 12px 7px 35px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #722F37;
+  font-size: 14px;
+}
+
+/* ICONS */
+.icon-wrapper {
+  position: relative;
+}
+
+.icon {
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.icon:hover {
+  transform: scale(1.15);
+  color: #1abc9c;
+}
+
+/* ========================= */
+/* PROFILE DROPDOWN (FIXED) */
+/* ========================= */
+
+.profile {
+  position: relative;
+}
+
+/* dropdown box */
+.profile .dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+
+  min-width: 180px;
+  background: #ffffff;
+  border-radius: 12px;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  overflow: hidden;
+
+  /* hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-12px);
+
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+
+/* show dropdown on hover */
+.profile:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* dropdown links */
+.profile .dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 15px;
+  text-decoration: none;
+
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: 0.2s;
+}
+
+/* hover effect */
+.profile .dropdown a:hover {
+  background: #722F37;
+  color: #fff;
+}
+
+/* keeps dropdown stable while moving mouse */
+.profile:hover .dropdown {
+  pointer-events: auto;
+}
