@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.islington</groupId>
-  <artifactId>Advanced__Programming</artifactId>
+  <artifactId>Ornexa</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Advanced__Programming Maven Webapp</name>
@@ -16,6 +16,6 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>Advanced__Programming</finalName>
+    <finalName>Ornexa</finalName>
   </build>
 </project>

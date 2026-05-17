@@ -35,11 +35,12 @@
       </ul>
 
       <div class="nav-right">
-        <div class="search-container">
-           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" placeholder="Search..." class="search-box">
-         
-        </div>
+        <form action="${pageContext.request.contextPath}/ProductServlet" method="GET" class="search-form">
+                    <button type="submit" class="search-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <input type="text" name="searchQuery" placeholder="Search..." class="search-box">
+                </form>
 
         <div class="icon-wrapper">
         	<a href="<%= request.getContextPath() %>/WishListServlet">

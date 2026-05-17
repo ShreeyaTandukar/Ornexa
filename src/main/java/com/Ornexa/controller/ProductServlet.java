@@ -38,18 +38,26 @@ public class ProductServlet extends HttpServlet {
 		        String Material = request.getParameter("material");
 		        String style = request.getParameter("style");
 		        String gender = request.getParameter("gender");
-		        boolean isFiltered =
-		                (Material != null && !Material.isEmpty()) ||
-		                (style != null && !style.isEmpty()) ||
-		                (gender != null && !gender.isEmpty());
+		        String searchQuery = request.getParameter("searchQuery");
+		        
+		        List<Product> allProducts;
 
-			 List<Product> allProducts = productService.getAllProducts();
-			 if (isFiltered) {
+		        // Check if ANY criteria are present
+		        boolean searching = (searchQuery != null && !searchQuery.trim().isEmpty());
+		        boolean filtering = (Material != null && !Material.isEmpty()) || 
+		                           (style != null && !style.isEmpty()) || 
+		                           (gender != null && !gender.isEmpty());
+
+		        if (searching) {
+		            // If user searched for something specifically
+		            allProducts = productService.searchProductsByName(searchQuery);
+		        } else if (filtering) {
+		            // If user used the sidebar filters
 		            allProducts = productService.getFilteredProducts(Material, style, gender);
 		        } else {
+		            // No search or filter, show everything
 		            allProducts = productService.getAllProducts();
 		        }
-
 			 int size = allProducts.size();
 
 			 List<Product> rightProducts = allProducts.subList(0, Math.min(6, size));
@@ -71,6 +79,7 @@ public class ProductServlet extends HttpServlet {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+		 
 	    }	
 
 	/**

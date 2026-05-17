@@ -3,6 +3,7 @@ package com.Ornexa.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,7 +161,40 @@ public class ProductDao {
 
 		    return rows > 0;
 		}
+		public List<Product> searchProducts(String query) {
+		    List<Product> products = new ArrayList<>();
+		    // Using LIKE with % allows for partial matches (e.g., "ring" matches "Gold Ring")
+		    String sql = "SELECT * FROM product WHERE product_name LIKE ? OR product_description LIKE ? OR material LIKE ?";
+		    try (Connection conn = DBconfig.getConnection();
+		         PreparedStatement ps = conn.prepareStatement(sql)) {
+		        
+		        String searchPattern = "%" + query + "%";
+		        ps.setString(1, searchPattern);
+		        ps.setString(2, searchPattern);
+		        ps.setString(3, searchPattern);
 
+		        ResultSet rs = ps.executeQuery();
+		        while (rs.next()) {
+		            Product p = new Product();
+
+			        p.setId(rs.getInt("product_id"));
+			        p.setName(rs.getString("product_name"));
+			        p.setPrice(rs.getDouble("product_price"));
+			        p.setStockQuantity(rs.getInt("stock_quantity"));
+			        p.setMaterial(rs.getString("material"));
+			        p.setGender(rs.getString("gender"));
+			        p.setDescription(rs.getString("product_description"));
+			        p.setImgUrl(rs.getString("img_url"));
+			        p.setCategoryId(rs.getInt("category_id"));
+			        p.setStyle(rs.getString("style"));
+
+		            products.add(p);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return products;
+		}
 
 
 }

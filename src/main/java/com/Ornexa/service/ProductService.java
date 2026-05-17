@@ -28,5 +28,13 @@ public class ProductService {
             return false;
         }
     }
+    public List<Product> searchProductsByName(String query) throws Exception {
+    
+        if (query == null || query.trim().isEmpty()) {
+            return getAllProducts();
+        }
+        
+        return productDao.searchProducts(query.trim());
+    }
 
 }
