@@ -25,7 +25,9 @@
                 </div>
 
                 <p class="text2">PERSONALIZE WITH YOUR ENGRAVING</p>
-                <button class="product_button">VIEW COLLECTION</button>
+                <a href="${pageContext.request.contextPath}/ProductServlet">
+        			<button class="product_button">VIEW COLLECTION</button>
+    			</a>
             </div>
 
             <div class="product_image">
