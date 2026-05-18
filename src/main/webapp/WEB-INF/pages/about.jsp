@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="<%= request.getContextPath() %>/css/about.css">
 </head>
 <body>
-	<%@ include file="Header.jsp" %>
+    <jsp:include page="Header.jsp"/>
     <div class="pageBlur"></div>
 
     <div class="mainSection">
@@ -85,7 +85,7 @@
             </div>
         </section>
     </div>
-	<%@ include file="footer.jsp" %>
+    <jsp:include page="footer.jsp"/>
 
 </body>
 </html>

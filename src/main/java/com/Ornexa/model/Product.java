@@ -18,9 +18,7 @@ public class Product {
     }
 
    
-    public Product(int id, String name, double price, int stockQuantity,
-                   String material, String gender, String description,
-                   String imgUrl, int categoryId, String style) {
+    public Product(int id, String name, double price, int stockQuantity, String material, String gender, String description,String imgUrl, int categoryId, String style) {
         this.id = id;
         this.name = name;
         this.price = price;

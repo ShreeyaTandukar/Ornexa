@@ -40,7 +40,7 @@ public class AdminProductServlet extends HttpServlet {
             }
 
             req.setAttribute("products", list);
-            req.getRequestDispatcher("/WEB-INF/pages/AdminProduct.jsp")
+            req.getRequestDispatcher("/WEB-INF/pages/adminProduct.jsp")
                .forward(req, res);
 
         } catch (Exception e) {

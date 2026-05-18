@@ -15,9 +15,7 @@
 
 
 <div class="admin-layout">
-	<%@ include file="AdminSideBar.jsp" %>
-    
-    
+    <jsp:include page="AdminSideBar.jsp"/>
     <div class="main">
 
         <section class="stats">
@@ -130,6 +128,6 @@
         </section>
     </div>
 </div>
-<%@ include file="footer.jsp" %>
+    <jsp:include page="footer.jsp"/>
 </body>
 </html>

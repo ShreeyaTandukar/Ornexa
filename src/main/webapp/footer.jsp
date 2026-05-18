@@ -28,10 +28,10 @@
 
     <div class="footer-section links-section">
       <h3>Quick Links</h3>
-      <p><a href="">Home</a></p>
-      <p><a href="topics.html">Our Collection</a></p>
-      <p><a href="about.html">About Us</a></p>
-      <p><a href="contact.html">Contact Us</a></p>
+      <p><a href="<%=request.getContextPath()%>/Home_pageServlet">Home</a></p>
+      <p><a href="<%=request.getContextPath()%>/ProductServlet">Our Collection</a></p>
+      <p><a href="<%=request.getContextPath()%>/AboutUsServlet">About Us</a></p>
+      <p><a href="<%=request.getContextPath()%>/ContactUsServlet">Contact Us</a></p>
     </div>
 
    <div class="footer-section social-section">

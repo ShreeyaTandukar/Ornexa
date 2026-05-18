@@ -72,6 +72,6 @@ public class OrderManagement extends HttpServlet {
         }
 
 
-        response.sendRedirect("OrderManagement");
+        response.sendRedirect(request.getContextPath()+"OrderManagement");
     }
 }

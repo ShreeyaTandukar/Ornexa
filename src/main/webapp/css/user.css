@@ -292,3 +292,13 @@ body {
     border-radius: 6px;
     cursor: pointer;
 }
+
+.stat-card-link {
+	text-decoration: none;
+	color: inherit;
+}
+
+.stat-card-link:hover .stat-card {
+	opacity: 0.85;
+	cursor: pointer;
+}

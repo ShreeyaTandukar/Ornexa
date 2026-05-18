@@ -31,6 +31,27 @@ body {
     z-index: -1;
 }
 
+.backbutton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+.backbutton i {
+    margin-right: 6px;
+}
+
+.backbutton:hover {
+    background: #622e2f;
+}
+
 .container {
     display: flex;
     height: 100vh;

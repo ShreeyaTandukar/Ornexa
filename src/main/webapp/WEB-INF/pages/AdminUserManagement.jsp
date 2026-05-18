@@ -25,7 +25,7 @@
 
 <div class="admin-layout">
 
-   <%@ include file="AdminSideBar.jsp" %>
+   <jsp:include page="AdminSideBar.jsp"/>
 
     <!-- MAIN CONTENT -->
     
@@ -141,7 +141,7 @@
 
 </div>
 
-<%@ include file="footer.jsp" %>
+    <jsp:include page="footer.jsp"/>
 
 </body>
 

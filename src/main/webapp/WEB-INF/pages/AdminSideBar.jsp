@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+
 
 <link rel="stylesheet"
     href="<%= request.getContextPath() %>/css/adminSideBar.css">
@@ -25,37 +27,27 @@
 
     <nav class="nav-menu">
 
-        <a href="<%= request.getContextPath() %>/AdminDashboard"
-           class="nav-item ${pageContext.request.requestURI.contains('AdminDashboard') ? 'active' : ''}">
-            <i class="fas fa-th-large"></i> DASHBOARD
-        </a>
+		<a href="<%= request.getContextPath() %>/AdminDashboard"
+			class="nav-item ${fn:contains(pageContext.request.requestURI,'AdminDashboard') ? 'active' : ''}">
+			<i class="fas fa-th-large"></i> DASHBOARD
+		</a> <a href="<%= request.getContextPath() %>/Product"
+			class="nav-item ${fn:indexOf(pageContext.request.requestURI,'Product') != -1 ? 'active' : ''}">
+			<i class="fas fa-box"></i> PRODUCTS
+		</a> <a href="<%= request.getContextPath() %>/OrderManagement"
+			class="nav-item ${fn:indexOf(pageContext.request.requestURI,'OrderManagement') != -1 ? 'active' : ''}">
+			<i class="fas fa-shopping-cart"></i> ORDERS
+		</a> <a href="<%= request.getContextPath() %>/StockManagement"
+			class="nav-item ${fn:indexOf(pageContext.request.requestURI,'StockManagement') != -1 ? 'active' : ''}">
+			<i class="fas fa-layer-group"></i> STOCK
+		</a> <a href="<%= request.getContextPath() %>/UserManagementServlet"
+			class="nav-item ${fn:indexOf(pageContext.request.requestURI,'UserManagementServlet') != -1 ? 'active' : ''}">
+			<i class="fas fa-users"></i> USERS
+		</a> <a href="<%= request.getContextPath() %>/adminReports.jsp"
+			class="nav-item ${fn:indexOf(pageContext.request.requestURI,'adminReports') != -1 ? 'active' : ''}">
+			<i class="fas fa-chart-line"></i> REPORTS
+		</a>
 
-        <a href="<%= request.getContextPath() %>/Product"
-           class="nav-item ${pageContext.request.requestURI.contains('Product') ? 'active' : ''}">
-            <i class="fas fa-box"></i> PRODUCTS
-        </a>
-
-        <a href="<%= request.getContextPath() %>/OrderManagement"
-           class="nav-item ${pageContext.request.requestURI.contains('OrderManagement') ? 'active' : ''}">
-            <i class="fas fa-shopping-cart"></i> ORDERS
-        </a>
-
-        <a href="<%= request.getContextPath() %>/StockManagement"
-           class="nav-item ${pageContext.request.requestURI.contains('StockManagement') ? 'active' : ''}">
-            <i class="fas fa-layer-group"></i> STOCK
-        </a>
-
-        <a href="<%= request.getContextPath() %>/UserManagementServlet"
-           class="nav-item ${pageContext.request.requestURI.contains('UserManagementServlet') ? 'active' : ''}">
-            <i class="fas fa-users"></i> USERS
-        </a>
-
-        <a href="<%= request.getContextPath() %>/adminReports.jsp"
-           class="nav-item ${pageContext.request.requestURI.contains('adminReports') ? 'active' : ''}">
-            <i class="fas fa-chart-line"></i> REPORTS
-        </a>
-
-    </nav>
+	</nav>
 
     <!-- ADD PRODUCT BUTTON -->
     <button class="add-product-btn" onclick="openAddModal()">

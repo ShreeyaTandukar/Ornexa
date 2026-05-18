@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public class InvoiceServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-
     private OrderManagementService service = new OrderManagementService();
 
     @Override

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
@@ -11,13 +11,12 @@
 <meta charset="UTF-8">
 <title>Admin Product</title>
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/AdminProduct.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/adminProduct.css">
 </head>
-
 <body>
 
 <div class="admin-layout">
-<%@ include file="AdminSideBar.jsp" %>
+<jsp:include page="AdminSideBar.jsp"/>
 
     
     <!-- MAIN -->

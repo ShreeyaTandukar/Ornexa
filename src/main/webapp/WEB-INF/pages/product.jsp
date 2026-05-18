@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
         <%@ taglib prefix="c" uri="jakarta.tags.core" %>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Our Collection</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/product.css">
 </head>
 <body>
-<%@ include file="Header.jsp" %>
+    <jsp:include page="Header.jsp"/>
 <div class="container2">
 
         <div class="top_row">
@@ -138,7 +138,7 @@
 			
 
     </div>
-    	<%@ include file="footer.jsp" %>
+    <jsp:include page="footer.jsp"/>
     
 
 </body>

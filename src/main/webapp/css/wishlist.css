@@ -1,0 +1,168 @@
+@charset "UTF-8";
+
+/* Container and Title */
+.wishlist-container {
+    padding: 50px 10%;
+    font-family: 'Poppins', 'Arial', sans-serif; /* Adding a cleaner font feel */
+    background-color: #fff;
+}
+
+.wishlist-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 400;
+    color: #5b1a1a;
+    margin-bottom: 40px;
+}
+
+/* Table Design */
+.wishlist-table-wrapper {
+    overflow-x: auto;
+}
+
+.wishlist-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wishlist-table thead {
+    background-color: #efe3e3; 
+}
+
+.wishlist-table th {
+    padding: 15px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #777;
+    text-transform: uppercase;
+}
+
+/* Ensure 'Unit Price', 'Stock Status', and 'Actions' are aligned nicely */
+.wishlist-table th:nth-child(3), 
+.wishlist-table th:nth-child(4), 
+.wishlist-table th:nth-child(5) {
+    text-align: left;
+}
+
+.wishlist-table td {
+    padding: 25px 15px;
+    border-bottom: 1px solid #f2f2f2;
+    vertical-align: middle;
+}
+
+/* Product Info Cell */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.product-info img {
+    width: 100px; /* Adjusted to match your screenshot size */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.product-name {
+    font-weight: 500;
+    color: #333;
+    font-size: 15px;
+}
+
+.remove-item {
+    color: #bbb;
+    cursor: pointer;
+    font-size: 18px;
+    width: 30px;
+}
+
+.remove-item:hover {
+    color: #5b1a1a;
+}
+
+/* Price and Stock */
+.price {
+    font-weight: 500;
+    color: #000;
+}
+
+.stock-status {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.in-stock { color: #538d71; } /* Specific green from your screenshot */
+.low-stock { color: #999; }
+
+/* Add to Cart Button Styling */
+.wishlist-table td a {
+    text-decoration: none; /* Removes underline from the link */
+    display: inline-block;
+}
+
+.add-to-cart {
+    background-color: #5b1a1a;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #431313; /* Darker maroon on hover */
+}
+
+/* Pagination & Footer */
+.wishlist-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.continue-shopping {
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.continue-shopping:hover {
+    color: #5b1a1a;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-num {
+    cursor: pointer;
+    color: #333;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 2px;
+}
+
+.page-num.active {
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+.arrow {
+    cursor: pointer;
+    padding-left: 10px;
+    font-weight: bold;
+}

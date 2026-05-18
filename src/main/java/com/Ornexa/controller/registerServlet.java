@@ -37,7 +37,6 @@ public class registerServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/WEB-INF/pages/register.jsp")
 		.forward(request, response);
 		}
@@ -90,26 +89,14 @@ public class registerServlet extends HttpServlet {
 				request.setAttribute("validating", "User already exists!");
 				request.getRequestDispatcher("/WEB-INF/pages/register.jsp")
 						.forward(request, response);
-
 			}
-			
-			
 		} catch (Exception e) {
 			    e.printStackTrace();
 			    request.setAttribute("error", "Something went wrong");
 			    request.getRequestDispatcher("/WEB-INF/pages/register.jsp")
 			           .forward(request, response);
 			    return;
-			
-
 		}
 	}
-	
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	
-
 }
 

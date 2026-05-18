@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 <div class="layout-wrapper">
 
    
-<%@ include file="AdminSideBar.jsp" %>
+    <jsp:include page="AdminSideBar.jsp"/>
 
     <main class="main-content">
 
@@ -194,7 +194,7 @@ pageEncoding="UTF-8"%>
 
 </div>
 
-<%@ include file="footer.jsp" %>
+    <jsp:include page="footer.jsp"/>
 
 </body>
 </html>
