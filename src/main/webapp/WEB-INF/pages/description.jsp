@@ -41,7 +41,7 @@
 			<button type="button" onclick="changeQty(1)">+</button>
 		</div>
 
-	<div class="forms-row">
+		<div class="forms-row">
 			<span class="cart-icon">&#128722;</span>
 			<form action="${pageContext.request.contextPath}/CartServlet" method="post" id="cartForm">
 				<input type="hidden" name="action"      value="add"/>
@@ -50,14 +50,13 @@
 				<input type="hidden" name="quantity"    id="quantityInput" value="1"/>
 				<button type="submit" class="btn-dark">Add To Cart</button>
 			</form>
-			<form action="${pageContext.request.contextPath}/payment" method="post" id="buyForm">
+			<form action="${pageContext.request.contextPath}/PaymentServlet" method="post" id="buyForm">
 				<input type="hidden" name="productName" value="${product.name}"/>
 				<input type="hidden" name="price"       value="${product.price}"/>
 				<input type="hidden" name="quantity"    id="buyQuantityInput" value="1"/>
 				<button type="submit" class="btn-dark">Buy Now</button>
 			</form>
 		</div>
-
 		<p class="exchange">&#128260; 7 Days Exchange</p>
 
 		<h3>Product Description</h3>

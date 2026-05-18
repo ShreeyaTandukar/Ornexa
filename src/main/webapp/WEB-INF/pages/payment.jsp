@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ taglib prefix="fn"  uri="jakarta.tags.functions" %>
-<%@ taglib prefix="c"   uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%
 	String itemNamesStr  = request.getParameter("itemNames");
 	String itemQtysStr   = request.getParameter("itemQtys");
@@ -156,7 +156,8 @@
 						<%-- Decrease qty form --%>
 						<div class="qty-box">
 							<form action="${pageContext.request.contextPath}/payment" method="get">
-								<input type="hidden" name="cartId" value="${param.source}"/>
+								<input type="hidden" name="cartId"  value="${param.cartId}"/>
+								<input type="hidden" name="source"  value="${param.source}"/>
 								<input type="hidden" name="productName" value="${param.productName}"/>
 								<input type="hidden" name="price" value="${param.price}"/>
 								<input type="hidden" name="imgUrl" value="${param.imgUrl}"/>
