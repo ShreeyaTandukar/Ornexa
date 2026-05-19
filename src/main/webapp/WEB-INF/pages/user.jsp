@@ -113,8 +113,10 @@
                     
                     <div class="account-links">
                         <a href="#"><i class="far fa-question-circle"></i> HELP CENTER</a>
-                        <a href="#" class="logout-link"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
-                    </div>
+						<a href="${pageContext.request.contextPath}/logout" class="logout-link">
+						    <i class="fas fa-sign-out-alt"></i> LOG OUT
+						</a>                   
+					 </div>
                 </div>
             </aside>
         </div>
