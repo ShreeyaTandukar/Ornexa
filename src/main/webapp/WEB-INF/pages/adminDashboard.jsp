@@ -1,135 +1,168 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-    <%@ page isELIgnored="false" %>
-    
+
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+
+<%@ page isELIgnored="false" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Dasboard</title>
-</head>
+<title>Admin Dashboard</title>
+
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/adminDashboard.css">
+
+</head>
+
 <body>
 
-
-
 <div class="admin-layout">
-	<%@ include file="AdminSideBar.jsp" %>
-    
-    
+
+<jsp:include page="AdminSideBar.jsp" />
+
     <div class="main">
 
+        <!-- STATS-->
         <section class="stats">
+
             <div class="stat-card">
                 <h4>Total Sales</h4>
                 <h2>Rs. ${totalSales}</h2>
-                <p class="green">+12.5% from last month</p>
+                <p class="green">Revenue overview</p>
             </div>
 
             <div class="stat-card">
                 <h4>Total Orders</h4>
                 <h2>${totalOrders}</h2>
-                <p class="green">+4.2% from last month</p>
+                <p class="green">All time orders</p>
             </div>
 
             <div class="stat-card">
                 <h4>New Users</h4>
                 <h2>${newUsers}</h2>
-                <p>Stable growth</p>    
+                <p>Latest registrations</p>
             </div>
 
             <div class="alert-card">
-            <i class="fas fa-exclamation-triangle"></i><br>
                 <p class="alert-title">Action Required</p>
                 <h4>Stock Alerts</h4>
-                <h2>14 Items</h2>
-                <button>Review Inventory</button>
-            </div>
+				<h2>${lowStockCount} Items</h2>  
+				<a href="StockManagement?type=low">
+			        Review Inventory
+			    </a>           
+			</div>
+
         </section>
 
+        <!--MIDDLE-->
         <section class="middle">
+
             <div class="box revenue-box">
                 <div class="box-header">
                     <div>
                         <h3>Revenue Growth</h3>
-                        <h5>Performance metrics for the current fiscal quarter</h5>
-                    </div>
-                    <div class="tabs">
-                        <span class="active-tab">Weekly</span>
-                        <span>Monthly</span>
-                        <span>Yearly</span>
+                        <h5>Performance overview</h5>
                     </div>
                 </div>
-               <img src="<%= request.getContextPath() %>/picture/revenue.jpeg"
-	             class="chart-img">
-                
+
+                <img src="<%= request.getContextPath() %>/picture/revenue.jpeg"
+                     class="chart-img">
             </div>
 
+            <!--RECENT ACTIVITY-->
             <div class="activity-box">
-			    <h3>Recent Activity</h3>
-			
-			    <c:forEach var="order" items="${orders}">
-			        <div class="activity">
-			
-			            <div>
-			                <p>Order #${order.id}</p>
-			                <small>Rs.${order.amount} • ${order.destination}</small>
-			            </div>
-			
-			            <span class="status ${order.status}">
-			                ${order.status}
-			            </span>
-			
-			        </div>
-			    </c:forEach>
 
-    <p class="view-all">View All Orders</p>
-</div>
+                <h3>Recent Activity</h3>
+
+                <c:forEach var="order" items="${orders}">
+                    <div class="activity">
+
+                        <div>
+                            <p>Order #${order.orderId}</p>
+                            <small>
+                                Rs.${order.totalAmount} • ${order.destination}
+                            </small>
+                        </div>
+
+                        <span class="status ${order.orderStatus}">
+                            ${order.orderStatus}
+                        </span>
+
+                    </div>
+                </c:forEach>
+				
+				<a href="OrderManagement" class="view-all">
+				    View All Orders
+				</a>
+            </div>
 
         </section>
 
+        <!--TABLE-->
         <section class="table-box">
+
             <div class="table-header">
                 <h3>Global Ledger</h3>
+
                 <div class="table-actions">
-                    <button class="filter-btn">Filter</button>
+                   
                     <button class="export-btn">Export PDF</button>
                 </div>
             </div>
 
             <table>
+
                 <thead>
                     <tr>
-                        <th>ORDER REFERENCES</th>
+                        <th>ORDER ID</th>
                         <th>CUSTOMER</th>
                         <th>DESTINATION</th>
                         <th>AMOUNT</th>
                         <th>STATUS</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                <c:forEach var="order" items="${orders}">
-	                    <tr> 
-	                        <td>${order.id}</td>
-	                        <td>
-	                            <div class="user">
-									<span class="avatar">
-									    ${order.userName.substring(0,1)}
-									</span>
-	               
-	                            </div>
-	                        </td>
-	                        <td>${order.destination}</td>
-	                        <td>${order.amount}</td>
-	                        <td><span class="status delivered">${order.status}</span></td>
-	                    </tr>
+
+                    <c:forEach var="order" items="${orders}">
+                        <tr>
+
+                            <td>${order.orderId}</td>
+
+                            <td>
+                                <div class="user">
+                                    <span class="avatar">
+                                        ${order.userName.substring(0,1)}
+                                    </span>
+                                    ${order.userName}
+                                </div>
+                            </td>
+
+                            <td>${order.destination}</td>
+
+                            <td>Rs. ${order.totalAmount}</td>
+
+                            <td>
+                                <span class="status ${order.orderStatus}">
+                                    ${order.orderStatus}
+                                </span>
+                            </td>
+
+                        </tr>
                     </c:forEach>
+
                 </tbody>
+
             </table>
+
         </section>
+
     </div>
 </div>
-<%@ include file="footer.jsp" %>
+
+<jsp:include page="footer.jsp" />
+
 </body>
 </html>

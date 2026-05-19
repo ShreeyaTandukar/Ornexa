@@ -10,7 +10,9 @@ import java.util.List;
 
 import com.Ornexa.model.Order;
 import com.Ornexa.service.RegisterService;
-import com.Ornexa.service.OrderService;
+import com.Ornexa.service.stockService;
+import com.Ornexa.service.OrderManagementService;
+
 
 /**
  * Servlet implementation class AdminDashboard
@@ -32,20 +34,24 @@ public class AdminDashboard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		OrderService service = new OrderService();
-		
+		OrderManagementService service = new OrderManagementService();		
 		 RegisterService registerService = new RegisterService();
+		 stockService stockService = new stockService();
 
-		    // ORDER DATA
-		    int totalOrders = service.getTotalOrders();
-		    List<Order> orders = service.getOrders();
+		 //cards 
+		 //total order
+		 List<Order> orders = service.getAllOrders();
+		 int totalOrders = orders.size();
 
-		    // USER DATA
-		    int newUsers = registerService.getNewUsers();
+		 // total sales
+		 double totalSales = service.getTotalRevenue();
 
-		    // SALES 
-		    double totalSales = service.getTotalSales();
-
+		 	// new users
+		 	int newUsers = registerService.getNewUsers();
+		 	
+		 	int lowStock =  stockService.lowStock();
+		 	
+		 	request.setAttribute("lowStockCount",lowStock );
 		    request.setAttribute("totalOrders", totalOrders);
 		    request.setAttribute("totalSales", totalSales);
 		    request.setAttribute("newUsers", newUsers);
