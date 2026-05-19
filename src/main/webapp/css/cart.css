@@ -16,7 +16,6 @@ body {
 	padding: 0 20px;
 }
 
-/* ── Header ── */
 .cart-header {
 	display: flex;
 	align-items: center;
@@ -34,7 +33,6 @@ body {
 	color: black;
 }
 
-/* ── Empty Cart ── */
 .empty-cart {
 	text-align: center;
 	font-size: 18px;
@@ -42,7 +40,6 @@ body {
 	margin-top: 60px;
 }
 
-/* ── Cart Item Card ── */
 .cart-item {
 	background-color: #7a3036;
 	color: white;
@@ -55,7 +52,6 @@ body {
 	gap: 16px;
 }
 
-/* ── Checkbox ── */
 .item-checkbox {
 	width: 20px;
 	height: 20px;
@@ -64,7 +60,6 @@ body {
 	accent-color: #fff;
 }
 
-/* ── Item Image ── */
 .item-image {
 	flex-shrink: 0;
 }
@@ -76,7 +71,6 @@ body {
 	border-radius: 4px;
 }
 
-/* ── Item Details ── */
 .item-details {
 	flex-grow: 1;
 }
@@ -91,7 +85,6 @@ body {
 	font-weight: bold;
 }
 
-/* ── Item Pricing ── */
 .item-pricing {
 	display: flex;
 	flex-direction: column;
@@ -100,7 +93,6 @@ body {
 	flex-shrink: 0;
 }
 
-/* ── Quantity Selector ── */
 .quantity-selector {
 	background: white;
 	border-radius: 4px;
@@ -147,7 +139,6 @@ body {
 	color: white;
 }
 
-/* ── Remove Button ── */
 .remove-btn {
 	background: none;
 	border: none;
@@ -163,7 +154,6 @@ body {
 	color: #ffaaaa;
 }
 
-/* ── Cart Summary Bar ── */
 .cart-summary {
 	display: flex;
 	justify-content: flex-end;
@@ -175,7 +165,6 @@ body {
 	color: white;
 }
 
-/* ── Checkout Section ── */
 .checkout-section {
 	display: flex;
 	align-items: center;

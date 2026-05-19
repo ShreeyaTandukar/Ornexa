@@ -95,41 +95,41 @@
 				</div>
 			</div>
 
-			<%-- EDIT address — submits to PaymentServlet with action=editAddress --%>
 			<form action="${pageContext.request.contextPath}/payment" method="get">
-				<input type="hidden" name="cartId"      value="${param.cartId}"/>
-				<input type="hidden" name="cartTotal"   value="${param.cartTotal}"/>
-				<input type="hidden" name="itemNames"   value="${param.itemNames}"/>
-				<input type="hidden" name="itemQtys"    value="${param.itemQtys}"/>
-				<input type="hidden" name="itemPrices"  value="${param.itemPrices}"/>
-				<input type="hidden" name="itemImgs"    value="${param.itemImgs}"/>
-				<input type="hidden" name="productName" value="${param.productName}"/>
-				<input type="hidden" name="price"       value="${param.price}"/>
-				<input type="hidden" name="quantity"    value="${param.quantity}"/>
-				<input type="hidden" name="source"      value="${param.source}"/>
-				<input type="hidden" name="showAddress" value="true"/>
-				<button type="submit" class="edit-btn">EDIT</button>
+			    <input type="hidden" name="cartId" value="${param.cartId}"/>
+			    <input type="hidden" name="cartTotal" value="${param.cartTotal}"/>
+			    <input type="hidden" name="itemNames" value="${param.itemNames}"/>
+			    <input type="hidden" name="itemQtys" value="${param.itemQtys}"/>
+			    <input type="hidden" name="itemPrices" value="${param.itemPrices}"/>
+			    <input type="hidden" name="itemImgs" value="${param.itemImgs}"/>
+			    <input type="hidden" name="productName" value="${param.productName}"/>
+			    <input type="hidden" name="price" value="${param.price}"/>
+			    <input type="hidden" name="quantity" value="${param.quantity}"/>
+			    <input type="hidden" name="source" value="${param.source}"/>
+			    <input type="hidden" name="imgUrl" value="${param.imgUrl}"/>
+			    <input type="hidden" name="showAddress" value="true"/>
+			    <button type="submit" class="edit-btn">EDIT</button>
 			</form>
 		</div>
 
-		<%-- Address input box — shown when showAddress=true --%>
 		<c:if test="${param.showAddress == 'true'}">
 			<form action="${pageContext.request.contextPath}/payment" method="get"
-				  class="address-edit-box">
-				<input type="hidden" name="cartId" value="${param.cartId}"/>
-				<input type="hidden" name="cartTotal" value="${param.cartTotal}"/>
-				<input type="hidden" name="itemNames" value="${param.itemNames}"/>
-				<input type="hidden" name="itemQtys" value="${param.itemQtys}"/>
-				<input type="hidden" name="itemPrices" value="${param.itemPrices}"/>
-				<input type="hidden" name="itemImgs" value="${param.itemImgs}"/>
-				<input type="hidden" name="productName" value="${param.productName}"/>
-				<input type="hidden" name="price" value="${param.price}"/>
-				<input type="hidden" name="quantity" value="${param.quantity}"/>
-				<input type="hidden" name="source" value="${param.source}"/>
-				<input type="text"   name="savedAddress"
-					   placeholder="Enter your full delivery address"
-					   value="${param.savedAddress}" required/>
-				<button type="submit">Save</button>
+			      class="address-edit-box">
+			    <input type="hidden" name="cartId" value="${param.cartId}"/>
+			    <input type="hidden" name="cartTotal" value="${param.cartTotal}"/>
+			    <input type="hidden" name="itemNames" value="${param.itemNames}"/>
+			    <input type="hidden" name="itemQtys" value="${param.itemQtys}"/>
+			    <input type="hidden" name="itemPrices" value="${param.itemPrices}"/>
+			    <input type="hidden" name="itemImgs" value="${param.itemImgs}"/>
+			    <input type="hidden" name="productName" value="${param.productName}"/>
+			    <input type="hidden" name="price" value="${param.price}"/>
+			    <input type="hidden" name="quantity" value="${param.quantity}"/>
+			    <input type="hidden" name="source" value="${param.source}"/>
+			    <input type="hidden" name="imgUrl" value="${param.imgUrl}"/>
+			    <input type="text"   name="savedAddress"
+			           placeholder="Enter your full delivery address"
+			           value="${param.savedAddress}" required/>
+			    <button type="submit">Save</button>
 			</form>
 		</c:if>
 
@@ -156,8 +156,8 @@
 						<%-- Decrease qty form --%>
 						<div class="qty-box">
 							<form action="${pageContext.request.contextPath}/payment" method="get">
-								<input type="hidden" name="cartId"  value="${param.cartId}"/>
-								<input type="hidden" name="source"  value="${param.source}"/>
+								<input type="hidden" name="cartId" value="${param.cartId}"/>
+								<input type="hidden" name="source" value="${param.source}"/>
 								<input type="hidden" name="productName" value="${param.productName}"/>
 								<input type="hidden" name="price" value="${param.price}"/>
 								<input type="hidden" name="imgUrl" value="${param.imgUrl}"/>

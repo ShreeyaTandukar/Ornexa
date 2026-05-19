@@ -58,12 +58,12 @@
 						</div>
 
 						<div class="item-pricing">
-							<%-- quantity buttons in their own separate form --%>
+							<%-- quantity buttons (+,-) in their own separate form --%>
 							<div class="quantity-selector">
 								<form action="${pageContext.request.contextPath}/CartServlet"
 									  method="post" style="display:contents;">
-									<input type="hidden" name="action"      value="update"/>
-									<input type="hidden" name="cartItemId"  value="${item.cartItemId}"/>
+									<input type="hidden" name="action" value="update"/>
+									<input type="hidden" name="cartItemId" value="${item.cartItemId}"/>
 									<input type="hidden" name="priceAtTime" value="${item.priceAtTime}"/>
 									<button type="submit" name="quantity"
 											value="${item.productQuantity - 1}"
@@ -79,10 +79,10 @@
 							</span>
 						</div>
 
-						<%-- remove button in its own form --%>
+						<%-- removes button (X) in its own form --%>
 						<form action="${pageContext.request.contextPath}/CartServlet"
 							  method="post" style="display:contents;">
-							<input type="hidden" name="action"     value="remove"/>
+							<input type="hidden" name="action" value="remove"/>
 							<input type="hidden" name="cartItemId" value="${item.cartItemId}"/>
 							<button type="submit" class="remove-btn">&#10005;</button>
 						</form>
@@ -90,7 +90,7 @@
 					</div>
 				</c:forEach>
 
-				<%-- summary bar at the bottom --%>
+				
 				<div class="cart-summary">
 					
 					<div class="checkout-section">
@@ -100,7 +100,7 @@
 							</strong>
 						</span>
 						<button type="submit" form="checkoutForm" class="checkout-btn">
-							Check Out (${fn:length(cartItems)})
+							Check Out 
 						</button>
 					</div>
 				</div>
@@ -113,34 +113,34 @@
 
 	<%@ include file="footer.jsp" %>
 
-<script>
-	// update the total whenever a checkbox is checked or unchecked
-	function updateTotal() {
-		var cards = document.querySelectorAll('.cart-item');
-		var total = 0;
-		cards.forEach(function(card) {
-			var cb = card.querySelector('.item-checkbox');
-			if (cb && cb.checked) {
-				total += parseFloat(card.getAttribute('data-subtotal'));
-			}
-		});
-		document.getElementById('summaryTotal').innerText =
-			'Rs.' + total.toLocaleString('en-IN', {
-				minimumFractionDigits: 2,
-				maximumFractionDigits: 2
+	<script>
+		// updates the total whenever a checkbox is checked or unchecked
+		function updateTotal() {
+			var cards = document.querySelectorAll('.cart-item');
+			var total = 0;
+			cards.forEach(function(card) {
+				var cb = card.querySelector('.item-checkbox');
+				if (cb && cb.checked) {
+					total += parseFloat(card.getAttribute('data-subtotal'));
+				}
 			});
-	}
-
-
-
-	// listen for changes on each item checkbox
-	document.querySelectorAll('.item-checkbox').forEach(function(cb) {
-		cb.addEventListener('change', updateTotal);
-	});
-
-	// run once on load to set the correct initial total
-	updateTotal();
-</script>
+			document.getElementById('summaryTotal').innerText =
+				'Rs.' + total.toLocaleString('en-IN', {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				});
+		}
+	
+	
+	
+		// listen for changes on each item checkbox
+		document.querySelectorAll('.item-checkbox').forEach(function(cb) {
+			cb.addEventListener('change', updateTotal);
+		});
+	
+		// runs once on load to set the correct initial total
+		updateTotal();
+	</script>
 
 </body>
 </html>

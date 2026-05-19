@@ -76,36 +76,46 @@
 			</section>
 
 			<section class="orders-section">
-				<h2>Recent Orders</h2>
-				<div class="table-container">
-					<table class="orders-table">
-						<thead>
-							<tr>
-								<th>ORDER ID</th>
-								<th>DATE</th>
-								<th>PRICE</th>
-								<th>STATUS</th>
-								<th>ACTION</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${empty orders}">
-								<tr>
-									<td colspan="5">No orders yet</td>
-								</tr>
-							</c:if>
-							<c:forEach var="order" items="${orders}">
-								<tr>
-									<td>${order.id}</td>
-									<td>${order.date}</td>
-									<td class="bold">RS ${order.price}</td>
-									<td><span class="status-tag delivered">${order.status}</span></td>
-									<td><a href="#" class="action-btn">View</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+			    <h2>Recent Orders</h2>
+			    <div class="table-container">
+			        <table class="orders-table">
+			            <thead>
+			                <tr>
+			                    <th>ORDER ID</th>
+			                    <th>DATE</th>
+			                    <th>PRICE</th>
+			                    <th>STATUS</th>
+			                    <th>ACTION</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <c:if test="${empty orders}">
+			                    <tr>
+			                        <td colspan="5">No orders yet</td>
+			                    </tr>
+			                </c:if>
+			                <c:forEach var="order" items="${orders}">
+			                    <tr>
+			                        <td>${order.id}</td>
+			                        <td>${order.orderDate}</td>
+			                        <td class="bold">Rs.${order.amount}</td>
+			                        <td>
+									    <span class="status-tag
+									        ${order.status == 'DELIVERED' ? 'delivered' :
+									          order.status == 'placed' ? 'placed' :
+									          order.status == 'CONFIRMED' ? 'confirmed' :
+									          order.status == 'IN TRANSIT' ? 'transit' :
+									          order.status == 'CANCELLED' ? 'cancelled' :
+									          'processing'}">
+									        ${order.status}
+									    </span>
+									</td>
+												                       
+			                    </tr>
+			                </c:forEach>
+			            </tbody>
+			        </table>
+			    </div>
 			</section>
 
 		</div>

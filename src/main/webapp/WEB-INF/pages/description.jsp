@@ -50,11 +50,13 @@
 				<input type="hidden" name="quantity"    id="quantityInput" value="1"/>
 				<button type="submit" class="btn-dark">Add To Cart</button>
 			</form>
-			<form action="${pageContext.request.contextPath}/PaymentServlet" method="post" id="buyForm">
-				<input type="hidden" name="productName" value="${product.name}"/>
-				<input type="hidden" name="price"       value="${product.price}"/>
-				<input type="hidden" name="quantity"    id="buyQuantityInput" value="1"/>
-				<button type="submit" class="btn-dark">Buy Now</button>
+			<form action="${pageContext.request.contextPath}/payment" method="get" id="buyForm">
+			    <input type="hidden" name="productName" value="${product.name}"/>
+			    <input type="hidden" name="price"       value="${product.price}"/>
+			    <input type="hidden" name="imgUrl"      value="${product.imgUrl}"/>
+			    <input type="hidden" name="quantity"    id="buyQuantityInput" value="1"/>
+			    <input type="hidden" name="source"      value="buynow"/>
+			    <button type="submit" class="btn-dark">Buy Now</button>
 			</form>
 		</div>
 		<p class="exchange">&#128260; 7 Days Exchange</p>
