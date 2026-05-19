@@ -1,8 +1,6 @@
 package com.Ornexa.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,297 +9,254 @@ import com.Ornexa.model.OrderItem;
 import com.Ornexa.utils.DBconfig;
 
 public class OrderDao {
-	public List<Order> getAllOrders() throws Exception{
-		Connection conn =DBconfig.getConnection();
-		String sql = "SELECT O.Order_Id, O.Destination, O.Total_Amount, O.Order_Status, U.userName "
-		           + "FROM order_table O "
-		           + "JOIN users U ON O.user_id = U.user_id "
-		           + "ORDER BY O.Order_Id DESC";
-		
-		PreparedStatement ps = conn.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		List<Order> ordersList = new ArrayList <>();
-		
-		while (rs.next()) {
-			Order orders = new Order();
-			orders.setId(rs.getInt("Order_Id"));
-			orders.setUserName(rs.getString("userName"));
-			orders.setDestination(rs.getString("Destination"));
-			orders.setAmount(rs.getDouble("Total_Amount"));
-			orders.setStatus(rs.getString("Order_Status"));
-			ordersList.add(orders);
-			
-			
-		}
-		rs.close();
-		ps.close();
-		conn.close();
-		return ordersList;
 
-	}
-	public double getTotalSales() throws Exception {
+	// get all orders
+    public List<Order> getAllOrders() {
 
-	    Connection conn = DBconfig.getConnection();
+        List<Order> list = new ArrayList<>();
 
-	    String sql = "SELECT SUM(Total_Amount) FROM order_table";
+        String sql = "SELECT o.*, u.userName, u.email " +
+                     "FROM order_table o " +
+                     "JOIN users u ON o.user_id = u.user_id " +
+                     "ORDER BY o.Order_Id DESC";
 
-	    PreparedStatement ps = conn.prepareStatement(sql);
-	    ResultSet rs = ps.executeQuery();
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-	    double total = 0;
+            while (rs.next()) {
 
-	    if (rs.next()) {
-	        total = rs.getDouble(1);
-	    }
+                Order o = new Order();
 
-	    rs.close();
-	    ps.close();
-	    conn.close();
+                o.setOrderId(rs.getInt("Order_Id"));
+                o.setOrderDate(rs.getString("Order_Date"));
+                o.setDestination(rs.getString("Destination"));
 
-	    return total;
-	}
-	 public List<Order> getAllOrdersA() {
+                double amount = rs.getDouble("Total_Amount");
+                if (rs.wasNull()) amount = 0;
 
-	        List<Order> list = new ArrayList<>();
+                o.setTotalAmount(amount);
+                o.setOrderStatus(rs.getString("Order_Status"));
 
-	        String sql = "SELECT o.*, u.userName, u.email " +
-	                     "FROM order_table o " +
-	                     "JOIN users u ON o.user_id = u.user_id " +
-	                     "ORDER BY o.Order_Id DESC";
+                o.setUserName(rs.getString("userName"));
+                o.setEmail(rs.getString("email"));
 
-	        try (Connection con = DBconfig.getConnection();
-	             PreparedStatement ps = con.prepareStatement(sql);
-	             ResultSet rs = ps.executeQuery()) {
+                list.add(o);
+            }
 
-	            while (rs.next()) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	                Order o = new Order();
+        return list;
+    }
 
-	                o.setId(rs.getInt("Order_Id"));
-	                o.setOrderDate(rs.getString("Order_Date"));
-	                o.setDestination(rs.getString("Destination"));
-	                o.setAmount(rs.getDouble("Total_Amount"));
-	                o.setStatus(rs.getString("Order_Status"));
+    // update order status (pending, cancelled, transit, delivered)
+    public boolean updateOrderStatus(int orderId, String status) {
 
-	                o.setUserName(rs.getString("userName"));
-	                o.setEmail(rs.getString("email"));
+        String sql = "UPDATE order_table SET Order_Status=? WHERE Order_Id=?";
 
-	                list.add(o);
-	            }
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+            ps.setString(1, status);
+            ps.setInt(2, orderId);
 
-	        return list;
-	    }
+            return ps.executeUpdate() > 0;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	    public boolean updateOrderStatus(int orderId, String status) {
+        return false;
+    }
 
-	        String sql = "UPDATE order_table SET Order_Status=? WHERE Order_Id=?";
+    //filtering data 
+    
+    public List<Order> getFilteredOrders(String status, String fromDate, String toDate) {
 
-	        try (Connection con = DBconfig.getConnection();
-	             PreparedStatement ps = con.prepareStatement(sql)) {
+        List<Order> list = new ArrayList<>();
 
-	            ps.setString(1, status);
-	            ps.setInt(2, orderId);
+        String sql = "SELECT o.*, u.userName, u.email " +
+                     "FROM order_table o " +
+                     "JOIN users u ON o.user_id = u.user_id " +
+                     "WHERE 1=1";
 
-	            return ps.executeUpdate() > 0;
+        if (status != null && !status.isEmpty()) {
+            sql += " AND o.Order_Status = ?";
+        }
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+        if (fromDate != null && !fromDate.isEmpty()) {
+            sql += " AND DATE(o.Order_Date) >= ?";
+        }
 
-	        return false;
-	    }
+        if (toDate != null && !toDate.isEmpty()) {
+            sql += " AND DATE(o.Order_Date) <= ?";
+        }
 
+        sql += " ORDER BY o.Order_Id DESC";
 
-	    public List<Order> getFilteredOrders(String status, String fromDate, String toDate) {
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-	        List<Order> list = new ArrayList<>();
+            int i = 1;
 
-	        String sql = "SELECT o.*, u.userName, u.email " +
-	                     "FROM order_table o " +
-	                     "JOIN users u ON o.user_id = u.user_id " +
-	                     "WHERE 1=1";
+            if (status != null && !status.isEmpty()) {
+                ps.setString(i++, status);
+            }
 
-	        if (status != null && !status.isEmpty()) {
-	            sql += " AND o.Order_Status = ?";
-	        }
+            if (fromDate != null && !fromDate.isEmpty()) {
+                ps.setString(i++, fromDate);
+            }
 
-	        if (fromDate != null && !fromDate.isEmpty()) {
-	            sql += " AND DATE(o.Order_Date) >= ?";
-	        }
+            if (toDate != null && !toDate.isEmpty()) {
+                ps.setString(i++, toDate);
+            }
 
-	        if (toDate != null && !toDate.isEmpty()) {
-	            sql += " AND DATE(o.Order_Date) <= ?";
-	        }
+            ResultSet rs = ps.executeQuery();
 
-	        sql += " ORDER BY o.Order_Id DESC";
+            while (rs.next()) {
 
-	        try (Connection con = DBconfig.getConnection();
-	             PreparedStatement ps = con.prepareStatement(sql)) {
+                Order o = new Order();
 
-	            int i = 1;
+                o.setOrderId(rs.getInt("Order_Id"));
+                o.setOrderDate(rs.getString("Order_Date"));
+                o.setDestination(rs.getString("Destination"));
+                o.setTotalAmount(rs.getDouble("Total_Amount"));
+                o.setOrderStatus(rs.getString("Order_Status"));
 
-	            if (status != null && !status.isEmpty()) {
-	                ps.setString(i++, status);
-	            }
+                o.setUserName(rs.getString("userName"));
+                o.setEmail(rs.getString("email"));
 
-	            if (fromDate != null && !fromDate.isEmpty()) {
-	                ps.setString(i++, fromDate);
-	            }
+                list.add(o);
+            }
 
-	            if (toDate != null && !toDate.isEmpty()) {
-	                ps.setString(i++, toDate);
-	            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	            ResultSet rs = ps.executeQuery();
+        return list;
+    }
 
-	            while (rs.next()) {
+    // total revenue/sales
+    public double getTotalRevenue() {
 
-	                Order o = new Order();
+        double total = 0;
 
-	                o.setId(rs.getInt("Order_Id"));
-	                o.setOrderDate(rs.getString("Order_Date"));
-	                o.setDestination(rs.getString("Destination"));
-	                o.setAmount(rs.getDouble("Total_Amount"));
-	                o.setStatus(rs.getString("Order_Status"));
+        String sql = "SELECT SUM(Total_Amount) FROM order_table WHERE Order_Status='DELIVERED'";
 
-	                o.setUserName(rs.getString("userName"));
-	                o.setEmail(rs.getString("email"));
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-	                list.add(o);
-	            }
+            if (rs.next()) {
+                total = rs.getDouble(1);
+            }
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	        return list;
-	    }
+        return total;
+    }
 
+    // monthly revenue 
+    public double getMonthlyRevenue(int monthOffset) {
 
-	    public double getTotalRevenue() {
+        double total = 0;
 
-	        double total = 0;
+        String sql = "SELECT SUM(Total_Amount) FROM order_table " +
+                     "WHERE MONTH(Order_Date) = MONTH(CURDATE() - INTERVAL ? MONTH) " +
+                     "AND Order_Status='DELIVERED'";
 
-	        String sql = "SELECT SUM(Total_Amount) FROM order_table WHERE Order_Status='DELIVERED'";
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-	        try (Connection con = DBconfig.getConnection();
-	             PreparedStatement ps = con.prepareStatement(sql);
-	             ResultSet rs = ps.executeQuery()) {
+            ps.setInt(1, monthOffset);
 
-	            if (rs.next()) {
-	                total = rs.getDouble(1);
-	            }
+            ResultSet rs = ps.executeQuery();
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+            if (rs.next()) {
+                total = rs.getDouble(1);
+            }
 
-	        return total;
-	    }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	 
-	    public double getMonthlyRevenue(int monthOffset) {
+        return total;
+    }
 
-	        double total = 0;
+    // get particular order by id
+    public List<OrderItem> getItemsByOrderId(int orderId) {
 
-	        String sql = "SELECT SUM(Total_Amount) FROM order_table " +
-	                     "WHERE MONTH(Order_Date) = MONTH(CURDATE() - INTERVAL ? MONTH) " +
-	                     "AND Order_Status='DELIVERED'";
+        List<OrderItem> list = new ArrayList<>();
 
-	        try (Connection con = DBconfig.getConnection();
-	             PreparedStatement ps = con.prepareStatement(sql)) {
+        String sql = "SELECT oi.*, p.Product_Name " +
+                     "FROM orderitem oi " +
+                     "JOIN product p ON oi.Product_Id = p.Product_Id " +
+                     "WHERE oi.Order_Id = ?";
 
-	            ps.setInt(1, monthOffset);
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-	            ResultSet rs = ps.executeQuery();
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
 
-	            if (rs.next()) {
-	                total = rs.getDouble(1);
-	            }
+            while (rs.next()) {
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+                OrderItem item = new OrderItem();
 
-	        return total;
-	    }
-	    
-	   
-	    
-	    public List<OrderItem> getItemsByOrderId(int orderId) {
+                item.setOrderId(rs.getInt("Order_Id"));
+                item.setProductId(rs.getInt("Product_Id"));
+                item.setQuantity(rs.getInt("Quantity"));
+                item.setPrice(rs.getDouble("Price"));
+                item.setProductName(rs.getString("Product_Name"));
 
-	        List<OrderItem> list = new ArrayList<>();
+                list.add(item);
+            }
 
-	        String sql = "SELECT oi.*, p.Product_Name " +
-	                     "FROM orderitem oi " +
-	                     "JOIN product p ON oi.Product_Id = p.Product_Id " +
-	                     "WHERE oi.Order_Id = ?";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	        try (Connection con = DBconfig.getConnection();
-	             PreparedStatement ps = con.prepareStatement(sql)) {
+        return list;
+    }
 
-	            ps.setInt(1, orderId);
-	            ResultSet rs = ps.executeQuery();
+    // single order for invoice
+    public Order getSingleOrder(int orderId) {
 
-	            while (rs.next()) {
+        String sql = "SELECT o.*, u.userName, u.email " +
+                     "FROM order_table o " +
+                     "JOIN users u ON o.user_id = u.user_id " +
+                     "WHERE o.Order_Id = ?";
 
-	                OrderItem item = new OrderItem();
+        try (Connection con = DBconfig.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-	                item.setOrderId(rs.getInt("Order_Id"));
-	                item.setProductId(rs.getInt("Product_Id"));
-	                item.setQuantity(rs.getInt("Quantity"));
-	                item.setPrice(rs.getDouble("Price")); 
-	                item.setProductName(rs.getString("Product_Name")); 
+            ps.setInt(1, orderId);
+            ResultSet rs = ps.executeQuery();
 
-	                list.add(item);
-	            }
+            if (rs.next()) {
 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+                Order o = new Order();
 
-	        return list;
-	    }
-	    
-	    public Order getSingleOrder(int orderId) {
+                o.setOrderId(rs.getInt("Order_Id"));
+                o.setOrderDate(rs.getString("Order_Date"));
+                o.setDestination(rs.getString("Destination"));
+                o.setTotalAmount(rs.getDouble("Total_Amount"));
+                o.setOrderStatus(rs.getString("Order_Status"));
 
-	        String sql = "SELECT o.*, u.userName, u.email " +
-	                     "FROM order_table o " +
-	                     "JOIN users u ON o.user_id = u.user_id " +
-	                     "WHERE o.Order_Id = ?";
+                o.setUserName(rs.getString("userName"));
+                o.setEmail(rs.getString("email"));
 
-	        try (Connection con = DBconfig.getConnection();
-	             PreparedStatement ps = con.prepareStatement(sql)) {
+                return o;
+            }
 
-	            ps.setInt(1, orderId);
-	            ResultSet rs = ps.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	            if (rs.next()) {
-
-	                Order o = new Order();
-
-	                o.setId(rs.getInt("Order_Id"));
-	                o.setOrderDate(rs.getString("Order_Date"));
-	                o.setDestination(rs.getString("Destination"));
-	                o.setAmount(rs.getDouble("Total_Amount"));
-	                o.setStatus(rs.getString("Order_Status"));
-
-	                o.setUserName(rs.getString("userName"));
-	                o.setEmail(rs.getString("email"));
-
-	                return o;
-	            }
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-
-	        return null;
-	    }
-
+        return null;
+    }
 }

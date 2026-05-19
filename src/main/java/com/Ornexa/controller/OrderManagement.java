@@ -19,25 +19,30 @@ public class OrderManagement extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	OrderManagementService service = new OrderManagementService();
+	OrderManagementService service = new OrderManagementService(); //Order service object
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	//filter
 
-        String status = request.getParameter("status");
-        String fromDate = request.getParameter("fromDate");
-        String toDate = request.getParameter("toDate");
+        String status = request.getParameter("status"); //Order status
+        String fromDate = request.getParameter("fromDate"); //starting date
+        String toDate = request.getParameter("toDate"); //ending date
 
         List<Order> orders;
 
-        if ((status != null && !status.isEmpty()) ||
+        //if filter active
+        if ((status != null && !status.isEmpty()) ||  
             (fromDate != null && !fromDate.isEmpty()) ||
             (toDate != null && !toDate.isEmpty())) {
 
-            orders = service.getFilteredOrders(status, fromDate, toDate);
+            orders = service.getFilteredOrders(status, fromDate, toDate); //give according to filter
 
-        } else {
+        } 
+        //else give all order detail
+        else {
             orders = service.getAllOrders();
         }
 
@@ -46,7 +51,7 @@ public class OrderManagement extends HttpServlet {
 
         request.setAttribute("orders", orders);
         request.setAttribute("revenue", revenue);
-        request.setAttribute("growth", growth);
+        request.setAttribute("growth", Math.abs(growth));
 
         request.getRequestDispatcher("/WEB-INF/pages/OrderManagement.jsp")
                .forward(request, response);
@@ -58,6 +63,7 @@ public class OrderManagement extends HttpServlet {
 
         String action = request.getParameter("action");
 
+        //updating status from order id 
         if ("updateStatus".equals(action)) {
 
             int orderId = Integer.parseInt(request.getParameter("orderId"));
