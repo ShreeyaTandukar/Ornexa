@@ -7,7 +7,9 @@ import com.Ornexa.model.AdminProduct;
 
 public class AdminProductService {
 
-    AdminProductDao dao = new AdminProductDao();
+    AdminProductDao dao = new AdminProductDao(); //DAO Object
+    
+    //getting all products
 
     public List<AdminProduct> getAllProducts() {
         try {
@@ -17,6 +19,8 @@ public class AdminProductService {
             return null;
         }
     }
+    
+    //adding new products in database
 
     public boolean addProduct(AdminProduct p) {
         try {
@@ -26,6 +30,8 @@ public class AdminProductService {
             return false;
         }
     }
+    
+    //updating product details
 
     public boolean updateProduct(AdminProduct p) {
         try {
@@ -36,6 +42,7 @@ public class AdminProductService {
         }
     }
 
+    // deleting product details
     public boolean deleteProduct(int id) {
         try {
             return dao.deleteProduct(id);
@@ -44,6 +51,8 @@ public class AdminProductService {
             return false;
         }
     }
+    
+    //getting product detail of a specific product
 
     public AdminProduct getProductById(int id) {
         try {
@@ -53,6 +62,8 @@ public class AdminProductService {
             return null;
         }
     }
+    
+    //get product according to filter
     
     public List<AdminProduct> getFilteredProducts(String material, String style, String gender) {
         try {

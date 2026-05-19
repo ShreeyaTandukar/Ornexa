@@ -14,11 +14,11 @@ public class AdminProduct {
     private String style;
 
    
-    public AdminProduct() {
-    }
+    public AdminProduct() {  //default constructor
+    }  
 
    
-    public AdminProduct(int id, String name, double price, int stockQuantity,
+    public AdminProduct(int id, String name, double price, int stockQuantity,  //constructor
                    String material, String gender, String description,
                    String imgUrl, int categoryId, String style) {
         this.id = id;
@@ -72,6 +72,8 @@ public class AdminProduct {
 	public String getStyle() {
 		return style;
 	}
+	
+	
     // Setters
     public void setId(int id) {
         this.id = id;
