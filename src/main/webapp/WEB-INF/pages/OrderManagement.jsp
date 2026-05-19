@@ -85,88 +85,80 @@
                 </thead>
                 <tbody>
                     <c:forEach var="o" items="${orders}">
-
-						<tr>
-						
-						    <td class="order-id">
-						        #ORN-${o.orderId}
-						    </td>
-						
-						    <td>
-						        <div class="customer-info">
-						
-						            <span class="avatar" style="background:#f1ebeb">
-						                ${fn:toUpperCase(fn:substring(o.userName,0,2))}
-						            </span>
-						
-						            <div class="c-text">
-						                <strong>${o.userName}</strong>
-						                <p>${fn:toUpperCase(o.email)}</p>
-						            </div>
-						
-						        </div>
-						    </td>
-						
-						    <td>${o.orderDate}</td>
-						
-						    <td class="amount">
-						        Rs.${o.totalAmount}
-						    </td>
-						
-						   <td>
-							    <form action="OrderManagement" method="post">
-							        <input type="hidden" name="orderId" value="${o.orderId}">
-							
-							        <select name="orderStatus"
-							                class="status-dropdown
-							                ${o.orderStatus == 'CONFIRMED' ? 'confirmed' :
-							                  o.orderStatus == 'IN TRANSIT' ? 'transit' :
-							                  o.orderStatus == 'DELIVERED' ? 'delivered' :
-							                  o.orderStatus == 'CANCELLED' ? 'cancelled' :
-							                  'processing'}"
-							                onchange="this.form.submit()">
-							
-							            <option value="CONFIRMED"
-							                ${o.orderStatus == 'CONFIRMED' ? 'selected' : ''}>
-							                Confirmed
-							            </option>
-							            
-							             <option value="PROCESSING"
-							                ${o.orderStatus == 'PROCESSING' ? 'selected' : ''}>
-							                Processing
-							            </option>
-							
-							
-							            <option value="IN TRANSIT"
-							                ${o.orderStatus == 'IN TRANSIT' ? 'selected' : ''}>
-							                In Transit
-							            </option>
-							
-							            <option value="DELIVERED"
-							                ${o.orderStatus == 'DELIVERED' ? 'selected' : ''}>
-							                Delivered
-							            </option>
-							
-							           
-							            <option value="CANCELLED"
-							                ${o.orderStatus == 'CANCELLED' ? 'selected' : ''}>
-							                Cancelled
-							            </option>
-							
-							        </select>
-							
-							        <input type="hidden" name="action" value="updateStatus">
-							    </form>
-							</td>
-						
-						    <td>
-						        <a href="<%=request.getContextPath()%>/Invoice?orderId=${o.orderId}" class="action-link">
-						            VIEW INVOICE
-						        </a>
-						    </td>
-						
-						</tr>
-
+					    <tr>
+					
+					        <td class="order-id">
+					            #ORN-${o.id}
+					        </td>
+					
+					        <td>
+					            <div class="customer-info">
+					                <span class="avatar" style="background:#f1ebeb">
+					                    ${fn:toUpperCase(fn:substring(o.userName,0,2))}
+					                </span>
+					                <div class="c-text">
+					                    <strong>${o.userName}</strong>
+					                    <p>${fn:toUpperCase(o.email)}</p>
+					                </div>
+					            </div>
+					        </td>
+					
+					        <td>${o.orderDate}</td>
+					
+					        <td class="amount">
+					            Rs.${o.amount}
+					        </td>
+					
+					        <td>
+					            <form action="OrderManagement" method="post">
+					                <input type="hidden" name="orderId" value="${o.id}">
+					                <select name="orderStatus"
+					                        class="status-dropdown
+					                        ${o.status == 'CONFIRMED' ? 'confirmed' :
+					                          o.status == 'IN TRANSIT' ? 'transit' :
+					                          o.status == 'DELIVERED' ? 'delivered' :
+					                          o.status == 'CANCELLED' ? 'cancelled' :
+					                          'processing'}"
+					                        onchange="this.form.submit()">
+					
+					                    <option value="CONFIRMED"
+					                        ${o.status == 'CONFIRMED' ? 'selected' : ''}>
+					                        Confirmed
+					                    </option>
+					
+					                    <option value="PROCESSING"
+					                        ${o.status == 'PROCESSING' ? 'selected' : ''}>
+					                        Processing
+					                    </option>
+					
+					                    <option value="IN TRANSIT"
+					                        ${o.status == 'IN TRANSIT' ? 'selected' : ''}>
+					                        In Transit
+					                    </option>
+					
+					                    <option value="DELIVERED"
+					                        ${o.status == 'DELIVERED' ? 'selected' : ''}>
+					                        Delivered
+					                    </option>
+					
+					                    <option value="CANCELLED"
+					                        ${o.status == 'CANCELLED' ? 'selected' : ''}>
+					                        Cancelled
+					                    </option>
+					
+					                </select>
+					                <input type="hidden" name="action" value="updateStatus">
+					            </form>
+					        </td>
+					
+					        <td>
+					            <a href="<%=request.getContextPath()%>/Invoice?orderId=${o.id}"
+					               class="action-link">
+					                VIEW INVOICE
+					            </a>
+					        </td>
+					
+					    </tr>
 					</c:forEach>
                 </tbody>
             </table>

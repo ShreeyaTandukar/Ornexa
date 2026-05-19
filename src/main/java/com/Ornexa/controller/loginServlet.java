@@ -1,16 +1,17 @@
 package com.Ornexa.controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import com.Ornexa.model.User;
 import com.Ornexa.service.LoginService;
 import com.Ornexa.utils.CookieUtil;
 import com.Ornexa.utils.SessionUtils;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(asyncSupported = true, urlPatterns = { "/loginServlet" })
 public class loginServlet extends HttpServlet {

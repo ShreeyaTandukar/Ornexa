@@ -1,7 +1,10 @@
 package com.Ornexa.dao;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.Ornexa.model.stock;
 import com.Ornexa.utils.DBconfig;

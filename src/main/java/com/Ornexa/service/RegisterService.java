@@ -1,16 +1,11 @@
 package com.Ornexa.service;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.Ornexa.dao.UserDao;
 import com.Ornexa.model.User;
-import com.Ornexa.utils.DBconfig;
-import com.Ornexa.utils.passwordUtils;
 
 public class RegisterService {
 	public boolean addCustomer(User customer) throws Exception{

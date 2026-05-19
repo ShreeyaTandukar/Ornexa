@@ -31,17 +31,17 @@ body {
 .paragraph p {
     text-align: left;
     max-width: 950px;
-    margin: 0 auto 30px auto; /* Space between each <p> */
+    margin: 0 auto 30px auto; 
     line-height: 1.9;
     font-size: 16px;
 }
 
 /* slogan */
 .slogan {
-    font-size: 24px;
-    font-weight: 800;
+    font-size: 28px;
+    font-weight: 500;
     margin-top: 60px; 
-    margin-bottom: 140px; /
+    margin-bottom: 140px; 
 }
 
 /* MEMBERS HEADING */
@@ -51,7 +51,7 @@ body {
     margin-bottom: 60px;
 }
 
-/* THE GRID (3 TOP, 2 BOTTOM)  */
+/* THE GRID */
 .members {
     display: flex;
     flex-wrap: wrap;         
@@ -68,7 +68,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* THE BLUR EFFECT  */
+/* THE BLUR EFFECT */
 .pageBlur {
     position: fixed;
     top: 0;
@@ -85,17 +85,15 @@ body {
     pointer-events: none; 
 }
 
-/* Activates blur effect when card is hovered */
 body:has(.memberCard:hover) .pageBlur {
     opacity: 1;
     visibility: visible;
 }
 
 .memberCard:hover {
-    z-index: 100; /* Brings the active card in front of the blur */
+    z-index: 100;
 }
 
-/* --- 5. IMAGE & POPUP --- */
 .memberPhoto {
     width: 175px;
     height: 175px;
@@ -105,41 +103,112 @@ body:has(.memberCard:hover) .pageBlur {
     background-color: #e6e6e6;
 }
 
+/* INFO POPUP */
 .infoPopup {
-    position: absolute;      /* Floats the box next to the photo */
-    top: 0;
-    left: 100%;  
-    transform: translateX(-25%);
-    margin-left: -10px;      
-    width: 270px;
-    background-color: #ffffff;
-    padding: 25px;
-    border: 1px solid #f0f0f0;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    text-align: left;
+    position: absolute;
+    top: -50px;              /* Adjusted to sit higher */
+    left: 60%;               /* Positioned to the side of the head */
+    width: 320px;            /* Increased width for cloud shape */
+    height: 280px;           /* Height to fit the background */
+    padding: 60px 40px;      /* Padding to keep text inside the cloud "bubbles" */
+    
+    /* SPEECH BUBBLE IMAGE STYLES */
+    background-image: url('../picture/cloud-bubble.png'); /* Use your 2nd image here */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;      /* Cloud text usually looks better centered */
     
     opacity: 0;
     visibility: hidden;
     z-index: 110;            
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: scale(0.8) translate(-20px, 20px); /* Animation start point */
 }
 
 .memberCard:hover .infoPopup {
     opacity: 1;
     visibility: visible;
+    transform: scale(1) translate(0, 0);
 }
 
 /* POPUP TEXT STYLES */
 .hoverTitle { 
-	font-size: 17px;
-	margin-bottom: 12px;
-	font-weight: bold; 
-	color: #000; 
-}
-.hoverDescription { 
-	font-size: 14px; 
-	color: #5d5d5d; 
-	line-height: 1.5; 
-	margin-bottom: 18px; 
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: bold; 
+    color: #000;
+    padding-top: 10px;
 }
 
+.hoverDescription { 
+    font-size: 13px; 
+    color: #444; 
+    line-height: 1.4; 
+    max-width: 200px;        /* Keeps text within the center of the cloud */
+    margin: 0 auto;
+}
+
+
+/* INFO POPUP */
+.infoPopup {
+    position: absolute;
+    top: -40px;              /* Positioned above the name */
+    left: 105%;              /* Positioned to the right of the photo */
+    width: 280px;
+    background: #ffffff;     /* White background for the bubble */
+    padding: 25px;
+    border-radius: 30px;     /* Rounded corners like a cloud */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* Soft shadow */
+    text-align: left;
+    
+    opacity: 0;
+    visibility: hidden;
+    z-index: 110;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy transition */
+    transform: scale(0.8) translateX(-20px);
+}
+
+/* THE TAIL OF THE CLOUD (The little triangle) */
+.infoPopup::after {
+    content: '';
+    position: absolute;
+    left: -15px;             /* Positioned on the left side of the bubble */
+    top: 40px;               /* Aligned with the member's head */
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-right: 20px solid #ffffff; /* This creates the triangle pointing left */
+    border-bottom: 15px solid transparent;
+}
+
+/* Show popup on hover */
+.memberCard:hover .infoPopup {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateX(0);
+}
+
+/* POPUP TEXT STYLES */
+.hoverTitle { 
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: bold; 
+    color: #000; 
+    line-height: 1.3;
+}
+
+.hoverDescription { 
+    font-size: 14px; 
+    color: #555; 
+    line-height: 1.5; 
+}
+
+/* Ensure the card doesn't clip the bubble */
+.memberCard {
+    overflow: visible; 
+}

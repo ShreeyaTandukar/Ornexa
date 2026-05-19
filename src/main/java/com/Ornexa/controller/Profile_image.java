@@ -2,12 +2,15 @@ package com.Ornexa.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
+
 import com.Ornexa.model.User;
 import com.Ornexa.service.RegisterService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 

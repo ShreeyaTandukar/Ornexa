@@ -51,8 +51,9 @@
                 </div>
 
                 <div class="memberCard">
-                    <img src="<%= request.getContextPath() %>/picture/Preetika _Laxmi_Rajbhandary.jpeg" class="memberPhoto">                    <h3>Preetika Laxmi Rajbhandary</h3>
+                <h3>Preetika Laxmi Rajbhandary</h3>
                     <p>Git Manager</p>
+                    <img src="<%= request.getContextPath() %>/picture/Preetika _Laxmi_Rajbhandary.jpeg" class="memberPhoto">                    
                     <div class="infoPopup">
                         <h4 class="hoverTitle">Preetika Laxmi Rajbhandary-Git Manager</h4>
                         <p class="hoverDescription">The technical foundation. She takes care of the coding, versioning, and integration of all technical enhancements.</p>

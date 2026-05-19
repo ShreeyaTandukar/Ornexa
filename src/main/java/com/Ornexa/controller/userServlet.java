@@ -8,63 +8,61 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
-import com.Ornexa.dao.UserDao;
+import com.Ornexa.dao.CartDao;
+import com.Ornexa.dao.OrderDao;
+import com.Ornexa.model.CartItem;
+import com.Ornexa.model.Order;
 import com.Ornexa.model.User;
-import com.Ornexa.service.LoginService;
 
-/**
- * Servlet implementation class userServlet
- */
 @WebServlet("/userServlet")
 public class userServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
-       
-	/**
-     * @see HttpServlet#HttpServlet()
-     */
-    public userServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    private UserDao service = new UserDao();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		 request.getRequestDispatcher("/WEB-INF/pages/user.jsp")
-         .forward(request, response);
-		try {
-	        String username = request.getParameter("userName");
+	OrderDao orderDao = new OrderDao();
+	CartDao cartDao = new CartDao();
 
-	        User user = service.getUserByUsername(username);
+	public userServlet() {
+		super();
+	}
 
-	        request.setAttribute("user", user);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	        request.getRequestDispatcher("/WEB-INF/pages/user.jsp")
-	               .forward(request, response);
-	        HttpSession session = request.getSession(false);
-			if(session == null || session.getAttribute("userName") == null) {
+		// check login first
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("user") == null) {
 			response.sendRedirect(request.getContextPath() + "/loginServlet");
 			return;
-			}
 		}
-			catch (Exception e) {
-	        e.printStackTrace();
-	        throw new ServletException(e);
-	    }
-		
-		
+
+		// get user from session
+		User user = (User) session.getAttribute("user");
+		int userId = user.getId();
+
+		// fetch orders for this user
+		List<Order> orders = orderDao.getOrdersByUserId(userId);
+		request.setAttribute("orders", orders);
+		request.setAttribute("user", user);
+
+		// get cart item count for the cart stat card
+		try {
+			int cartId = cartDao.getOrCreateCart(userId);
+			List<CartItem> cartItems = cartDao.getCartItems(cartId);
+			request.setAttribute("cartCount", cartItems.size());
+		} catch (Exception e) {
+			request.setAttribute("cartCount", 0);
+			e.printStackTrace();
+		}
+
+		request.getRequestDispatcher("/WEB-INF/pages/user.jsp")
+				.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

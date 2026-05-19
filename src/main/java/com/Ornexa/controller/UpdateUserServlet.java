@@ -1,10 +1,10 @@
 package com.Ornexa.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import com.Ornexa.model.User;
 import com.Ornexa.service.RegisterService;
-import java.io.File;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;

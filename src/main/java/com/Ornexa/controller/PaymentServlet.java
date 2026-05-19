@@ -1,15 +1,16 @@
 package com.Ornexa.controller;
 
+import java.io.IOException;
+
+import com.Ornexa.model.User;
+import com.Ornexa.service.PaymentService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.io.IOException;
-
-import com.Ornexa.model.User;
-import com.Ornexa.service.PaymentService;
 
 /**
  * Servlet implementation class PaymentServlet
@@ -51,19 +52,19 @@ public class PaymentServlet extends HttpServlet {
 			return;
 		}
 
-		User   user          = (User) session.getAttribute("user");
-		int    userId        = user.getId();
+		User user = (User) session.getAttribute("user");
+		int userId = user.getId();
 		String paymentMethod = request.getParameter("paymentMethod");
-		String destination   = request.getParameter("destination");
-		String source        = request.getParameter("source");
+		String destination = request.getParameter("destination");
+		String source = request.getParameter("source");
 
 		boolean success = false;
 
 		if (source != null && source.equals("buynow")) {
 			// Buy Now — single product
 			String productName = request.getParameter("productName");
-			double price       = Double.parseDouble(request.getParameter("price"));
-			int    quantity    = Integer.parseInt(request.getParameter("quantity"));
+			double price = Double.parseDouble(request.getParameter("price"));
+			int quantity = Integer.parseInt(request.getParameter("quantity"));
 
 			success = paymentService.processBuyNowPayment(
 					userId, productName, price, quantity, paymentMethod, destination);
@@ -72,13 +73,13 @@ public class PaymentServlet extends HttpServlet {
 			// Cart checkout — selected items only
 			int    cartId = Integer.parseInt(request.getParameter("cartId"));
 
-			String itemNamesStr  = request.getParameter("itemNames");
-			String itemQtysStr   = request.getParameter("itemQtys");
+			String itemNamesStr = request.getParameter("itemNames");
+			String itemQtysStr = request.getParameter("itemQtys");
 			String itemPricesStr = request.getParameter("itemPrices");
 
-			String[] itemNames  = (itemNamesStr  != null && !itemNamesStr.isEmpty())
+			String[] itemNames = (itemNamesStr  != null && !itemNamesStr.isEmpty())
 								  ? itemNamesStr.split("\\|")  : new String[0];
-			String[] itemQtys   = (itemQtysStr   != null && !itemQtysStr.isEmpty())
+			String[] itemQtys = (itemQtysStr   != null && !itemQtysStr.isEmpty())
 								  ? itemQtysStr.split("\\|")   : new String[0];
 			String[] itemPrices = (itemPricesStr != null && !itemPricesStr.isEmpty())
 								  ? itemPricesStr.split("\\|") : new String[0];

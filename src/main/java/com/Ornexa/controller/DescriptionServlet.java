@@ -1,14 +1,15 @@
 package com.Ornexa.controller;
 
+import java.io.IOException;
+
+import com.Ornexa.model.Product;
+import com.Ornexa.service.ProductService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-import com.Ornexa.model.Product;
-import com.Ornexa.service.ProductService;
 
 /**
  * Servlet implementation class DescriptionServlet

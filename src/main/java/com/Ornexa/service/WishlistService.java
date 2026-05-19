@@ -1,7 +1,7 @@
 package com.Ornexa.service;
 
 import java.util.List;
-import com.Ornexa.dao.WishlistDao;
+
 import com.Ornexa.model.WishlistItem;
 
 public class WishlistService {

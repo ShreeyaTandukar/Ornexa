@@ -37,9 +37,9 @@ public class PaymentService {
 
 			// inserts each selected item into orderitem
 			for (int i = 0; i < itemNames.length; i++) {
-				int    productId = paymentDao.getProductIdByName(itemNames[i]);
-				int    qty       = Integer.parseInt(itemQtys[i]);
-				double price     = Double.parseDouble(itemPrices[i]);
+				int productId = paymentDao.getProductIdByName(itemNames[i]);
+				int qty = Integer.parseInt(itemQtys[i]);
+				double price = Double.parseDouble(itemPrices[i]);
 				paymentDao.insertOrderItem(orderId, paymentId, productId, qty, price);
 			}
 
@@ -75,19 +75,19 @@ public class PaymentService {
 		}
 	}
 
-	// ── Buy Now — single product ──
+	// buy now (description page)
 	public boolean processBuyNowPayment(int userId, String productName,
 			double price, int quantity, String paymentMethod, String destination) {
 		try {
 			double total = price * quantity + 100; // add shipping
 
-			// Step 1 — insert payment
+			// inserts payment
 			int paymentId = paymentDao.insertPayment(paymentMethod, total);
 
-			// Step 2 — insert order
+			// inserts order
 			int orderId = paymentDao.insertOrder(userId, destination, total);
 
-			// Step 3 — insert single item into orderitem
+			// inserts single item into orderitem
 			int productId = paymentDao.getProductIdByName(productName);
 			paymentDao.insertOrderItem(orderId, paymentId, productId, quantity, price);
 
