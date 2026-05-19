@@ -7,6 +7,8 @@ import com.Ornexa.model.stock;
 import com.Ornexa.utils.DBconfig;
 
 public class stockDao {
+	
+	//all stock detail
 
     public List<stock> getAllStock() {
 
@@ -17,6 +19,7 @@ public class stockDao {
         return getStockByQuery(sql);
     }
 
+    // stock quantity low than 50 and more than 0
     public int lowStock() {
 
         String sql = "SELECT COUNT(*) FROM product WHERE Stock_Quantity BETWEEN 1 AND 50";
@@ -33,6 +36,8 @@ public class stockDao {
 
         return 0;
     }
+    
+    //stock quantity 0
     
     public int outStock() {
 
@@ -51,7 +56,7 @@ public class stockDao {
         return 0;
     }
     
-    
+    // product detail whose stock is low
     public List<stock> getLowStockList() {
 
         String sql =
@@ -61,7 +66,9 @@ public class stockDao {
 
         return getStockByQuery(sql);
     }
+    
 
+    //product detail whose stock is 0
     public List<stock> getOutStockList() {
 
         String sql =
@@ -71,7 +78,9 @@ public class stockDao {
 
         return getStockByQuery(sql);
     }
+    
 
+    // add quantity to stock
     public boolean addStock(int id, int qty) {
 
         String sql =
@@ -94,6 +103,7 @@ public class stockDao {
     }
 
  
+    // Decreasing stock when order gets delivered
     public boolean decreaseStock(int id, int qty) {
 
         String sql =
@@ -121,6 +131,7 @@ public class stockDao {
     }
 
 
+    //total products
     public int totalItems() {
 
         String sql = "SELECT COUNT(*) FROM product";
@@ -139,6 +150,7 @@ public class stockDao {
     }
 
  
+    //calculation of stock value 
     public double stockValue() {
 
         String sql =
@@ -157,7 +169,7 @@ public class stockDao {
         return 0;
     }
 
-    
+    // filter
     private List<stock> getStockByQuery(String sql) {
 
         List<stock> list = new ArrayList<>();

@@ -1,6 +1,8 @@
 package com.Ornexa.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 import com.Ornexa.service.stockService;
 import com.Ornexa.utils.ValidationUtils;
 
@@ -15,15 +17,18 @@ import jakarta.servlet.http.HttpServletResponse;
 public class StockManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    stockService service = new stockService();
+    stockService service = new stockService(); //Service Object
 
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
 
+    	DecimalFormat df = new DecimalFormat("#.##");
+
         String type = request.getParameter("type");
 
         try {
+        	// filter 
 
             if ("low".equals(type)) {
                 request.setAttribute("stockList", service.getLow());
@@ -36,7 +41,7 @@ public class StockManagement extends HttpServlet {
             }
 
             request.setAttribute("totalItems", service.totalItems());
-            request.setAttribute("stockValue", service.stockValue());
+            request.setAttribute("stockValue", df.format(service.stockValue()));
             request.setAttribute("lowStock", service.lowStock());
             request.setAttribute("outStock", service.outStock());
 
@@ -59,6 +64,7 @@ public class StockManagement extends HttpServlet {
         String productId = req.getParameter("id");
         String qty = req.getParameter("qty");
 
+        // error message when add stock button is clicked without entering quantity
         String validating = ValidationUtils.validateStock(qty);
 
         if (validating != null) {
