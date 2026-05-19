@@ -16,7 +16,7 @@ public class InvoiceServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private OrderManagementService service = new OrderManagementService();
+    private OrderManagementService service = new OrderManagementService(); //order object
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,20 +24,18 @@ public class InvoiceServlet extends HttpServlet {
 
         try {
 
-            int orderId = Integer.parseInt(request.getParameter("orderId"));
+            int orderId = Integer.parseInt(request.getParameter("orderId")); //get order id 
 
-            Order order = service.getOrderWithItems(orderId);
+            Order order = service.getOrderWithItems(orderId); // get order item
 
             if (order == null) {
-                response.sendRedirect("adminOrderL.jsp");
+                response.sendRedirect("adminOrder.jsp");
                 return;
             }
 
-            // 3. SEND DATA TO JSP
             request.setAttribute("order", order);
             request.setAttribute("items", order.getItems());
 
-            // 4. FORWARD TO INVOICE PAGE
             request.getRequestDispatcher("/WEB-INF/pages/Invoice.jsp").forward(request, response);
 
         } catch (Exception e) {
