@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <%@ page isELIgnored="false" %>
 
 <!DOCTYPE html>
@@ -11,16 +11,15 @@
 <meta charset="UTF-8">
 <title>Admin Product</title>
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/AdminProduct.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/adminProduct.css">
 </head>
 
 <body>
 
 <div class="admin-layout">
-<%@ include file="AdminSideBar.jsp" %>
+<jsp:include page="AdminSideBar.jsp" />
 
     
-    <!-- MAIN -->
  <main class="main-content">
         <header class="inventory-header">
             <div class="header-text">
@@ -42,25 +41,25 @@
 		
 		    <div class="filter-item">
 		        <label>MATERIAL</label>
-		        <select name="material" onchange="this.form.submit()">
+		        <select name="filtermaterial" onchange="this.form.submit()">
 
-				    <option value="" ${param.material == null || param.material == '' ? 'selected' : ''}>
+				    <option value="" ${param.filtermaterial == null || param.filtermaterial == '' ? 'selected' : ''}>
 				        All
 				    </option>
 				
-				    <option value="Gold" ${param.material == 'Gold' ? 'selected' : ''}>
+				    <option value="Gold" ${param.filtermaterial == 'Gold' ? 'selected' : ''}>
 				        Gold
 				    </option>
 				
-				    <option value="Silver" ${param.material == 'Silver' ? 'selected' : ''}>
+				    <option value="Silver" ${param.filtermaterial == 'Silver' ? 'selected' : ''}>
 				        Silver
 				    </option>
 				
-				    <option value="Diamond" ${param.material == 'Diamond' ? 'selected' : ''}>
+				    <option value="Diamond" ${param.filtermaterial == 'Diamond' ? 'selected' : ''}>
 				        Diamond
 				    </option>
 				
-				    <option value="Platinum" ${param.material == 'Platinum' ? 'selected' : ''}>
+				    <option value="Platinum" ${param.filtermaterial == 'Platinum' ? 'selected' : ''}>
 				        Platinum
 				    </option>
 
@@ -70,18 +69,18 @@
 		    <div class="filter-item">
 			    <label>STYLE</label>
 			
-			    <select name="style" onchange="this.form.submit()">
+			    <select name="filterstyle" onchange="this.form.submit()">
 			
-			        <option value="" ${param.style == null || param.style == '' ? 'selected' : ''}>
+			        <option value="" ${param.filterstyle == null || param.filterstyle == '' ? 'selected' : ''}>
 			            All
 			        </option>
 			
-			        <option value="Casual" ${param.style == 'Casual' ? 'selected' : ''}>
-			            Casual
+			        <option value="Traditional" ${param.filterstyle == 'Traditional' ? 'selected' : ''}>
+			            Traditional
 			        </option>
 			
-			        <option value="Formal" ${param.style == 'Formal' ? 'selected' : ''}>
-			            Formal
+			        <option value="Modern" ${param.filterstyle == 'Modern' ? 'selected' : ''}>
+			            Modern
 			        </option>
 			
 			    </select>
@@ -89,25 +88,25 @@
 		   <div class="filter-item">
 			    <label>GENDER</label>
 			
-			    <select name="gender" onchange="this.form.submit()">
+			    <select name="filtergender" onchange="this.form.submit()">
 			
-			        <option value="" ${param.gender == null || param.gender == '' ? 'selected' : ''}>
+			        <option value="" ${param.filtergender == null || param.filtergender == '' ? 'selected' : ''}>
 			            All
 			        </option>
 			
-			        <option value="Male" ${param.gender == 'Male' ? 'selected' : ''}>
-			            Male
+			        <option value="Men" ${param.filtergender == 'Men' ? 'selected' : ''}>
+			            Men
 			        </option>
 			
-			        <option value="Female" ${param.gender == 'Female' ? 'selected' : ''}>
-			            Female
+			        <option value="Women" ${param.filtergender == 'Women' ? 'selected' : ''}>
+			            Women
 			        </option>
 			
 			    </select>
 			</div>
 		            <div class="filter-reset">
 		
-		    <a href="Product?material=&style=&gender=">
+		    <a href="Product?filtermaterial=&filterstyle=&filtergender=">
 			    RESET FILTERS <i class="fas fa-redo"></i>
 			</a>
 			</div>
@@ -117,7 +116,7 @@
 		</form>
         
 
-        <!-- TABLE -->
+      
         <table class="inventory-table">
 
             <thead>
@@ -136,33 +135,31 @@
 
                 <tr>
 
-                    <!-- PRODUCT -->
+                  
                     <td class="product-cell">
-                        <img src="<%=request.getContextPath()%>/${p.imgUrl}" width="50">
+						<img src="<%=request.getContextPath()%>/picture/${p.imgUrl}" width="50">
                         <span class="product-title">${p.name}</span>
                     </td>
 
-                    <!-- COLLECTION -->
                     <td>
                         <span class="badge">${p.style}</span>
                     </td>
 
-                    <!-- PRICE -->
+                 
                     <td class="price-cell">
                         Rs. ${p.price}
                     </td>
 
-                    <!-- STOCK -->
+                 
                     <td>
                         ${p.stockQuantity} units
                     </td>
 
-                    <!-- ACTIONS -->
                     <td class="action-cell">
                     
 
-                        <!-- EDIT -->
-                        <button class="icon-btn"
+                        <button  type="button"
+                        class="icon-btn"
                             onclick="openEditModal(
                                 '${p.id}',
                                 '${fn:escapeXml(p.name)}',
@@ -178,7 +175,7 @@
                             <i class="fas fa-pen"></i>
                         </button>
 
-                        <!-- DELETE -->
+                
                        <form action="Product" method="post" style="display:inline;">
 						    <input type="hidden" name="action" value="delete">
 						    <input type="hidden" name="id" value="${p.id}">
@@ -199,35 +196,61 @@
 
 </div>
 
+ <!--Pop up-->
 
-<!-- ================= EDIT MODAL ================= -->
-<div id="editModal" class="modal">
+<div id="editModal" class="modal ${not empty openEditModal ? 'show' : ''}">
+
     <div class="modal-content">
 
-        <span onclick="closeEditModal()">&times;</span>
+      
+        <span class="close" onclick="closeEditModal()">&times;</span>
 
         <h2>Edit Product</h2>
-      <p style="color:red;">
-		    <%= request.getAttribute("errorMsg") != null
-		        ? request.getAttribute("errorMsg")
-		        : "" %>
-		</p>
 
-        <form action="Product" method="post">
+        <c:if test="${not empty errorMsg}">
+            <p style="color:red;">${errorMsg}</p>
+        </c:if>
+
+        <form action="${pageContext.request.contextPath}/Product" method="post">
 
             <input type="hidden" name="action" value="update">
+
             <input type="hidden" id="editId" name="id">
 
-            <input type="text" id="editName" name="name"  placeholder="Name">
+            <input type="text" id="editName" name="name" placeholder="Name">
             <input type="number" id="editPrice" name="price" placeholder="Price">
             <input type="number" id="editStock" name="stockQuantity" placeholder="Stock">
-            <input type="text" id="editMaterial" name="material" placeholder="Material">
-            <input type="text" id="editGender" name="gender" placeholder="Gender">
-            <input type="text" id="editStyle" name="style" placeholder="Style">
-            <input type="text" id="editDesc" name="description" placeholder="Description" >
-            <input type="text" id="editImg" name="imgUrl" placeholder="Image URL">
-            <input type="number" id="editCat" name="categoryId" placeholder="Category ID">
-            
+
+        
+            <select name="material" id="editMaterial">
+                <option value="">Select Material</option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+                <option value="Diamond">Diamond</option>
+            </select>
+
+            <select name="gender" id="editGender">
+                <option value="">Select Gender</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+            </select>
+
+            <select name="style" id="editStyle">
+                <option value="">Select Style</option>
+                <option value="Traditional">Traditional</option>
+                <option value="Modern">Modern</option>
+            </select>
+
+
+            <input type="text" id="editDesc" name="description" placeholder="Description">
+
+            <select name="categoryId" id="editCat">
+                <option value="">Select Category</option>
+                <option value="1">Necklace</option>
+                <option value="2">Earring</option>
+                <option value="3">Ring</option>
+                <option value="4">Bracelet</option>
+            </select>
 
             <button type="submit">UPDATE</button>
 
@@ -236,14 +259,19 @@
     </div>
 </div>
 
-<!-- ================= JS ================= -->
+ <!--java script-->
 <script>
 
 
+function closeEditModal() {
+    document.getElementById("editModal").classList.remove("show");
+    document.body.classList.remove("modal-open");
+}
 
-function openEditModal(id, name, price, stock, material, gender, style, desc, img, cat) {
+function openEditModal(id, name, price, stock, material, gender, style, desc,imgUrl, cat) {
 
-    document.getElementById("editModal").style.display = "block";
+    document.getElementById("editModal").classList.add("show");
+    document.body.classList.add("modal-open");
 
     document.getElementById("editId").value = id;
     document.getElementById("editName").value = name;
@@ -253,28 +281,31 @@ function openEditModal(id, name, price, stock, material, gender, style, desc, im
     document.getElementById("editGender").value = gender;
     document.getElementById("editStyle").value = style;
     document.getElementById("editDesc").value = desc;
-    document.getElementById("editImg").value = img;
-    document.getElementById("editCat").value = cat;
-}
-
-function closeEditModal() {
-    document.getElementById("editModal").style.display = "none";
-}
-window.onload = function () {
-
-    <% if(request.getAttribute("openAddModal") != null) { %>
-        openAddModal();
-    <% } %>
-
-    <% if(request.getAttribute("openEditModal") != null) { %>
-        document.getElementById("editModal").style.display = "block";
-    <% } %>
-
-};
+    document.getElementById("editCat").value = String(cat);}
 
 </script>
 
-<%@ include file="footer.jsp" %>
+<c:if test="${not empty openEditModal}">
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    document.getElementById("editModal").classList.add("show");
+    document.body.classList.add("modal-open");
+
+    document.getElementById("editId").value = "${id}";
+    document.getElementById("editName").value = "${name}";
+    document.getElementById("editPrice").value = "${price}";
+    document.getElementById("editStock").value = "${stockQuantity}";
+    document.getElementById("editMaterial").value = "${material}";
+    document.getElementById("editGender").value = "${gender}";
+    document.getElementById("editStyle").value = "${style}";
+    document.getElementById("editDesc").value = "${description}";
+    document.getElementById("editCat").value ="${categoryId}";
+    });
+</script>
+</c:if>
+
+<jsp:include page="footer.jsp" />
 
 </body>
 </html>
