@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* --- 1. Variables & Base --- */
+/* ---Variables & Base --- */
 :root {
     --maroon: #5D262B;
     --bg-main: #FAF9F6;
@@ -22,7 +22,7 @@ body {
     padding: 0 20px;
 }
 
-/* --- 2. Hero Banner --- */
+/* --- Hero Banner --- */
 .hero-banner-img {
     width: 100%;
     height: 180px;
@@ -51,7 +51,7 @@ body {
     text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-/* --- 3. Main Layout --- */
+/* --- Main Layout --- */
 .main-layout {
     display: flex;
     gap: 35px;
@@ -61,7 +61,7 @@ body {
 .left-column { flex: 3; }
 .right-column { flex: 1; position: sticky; top: 20px; }
 
-/* --- 4. Stat Cards --- */
+/* --- Stat Cards --- */
 .stats-row { display: flex; gap: 20px; margin-bottom: 45px; }
 .stat-card {
     background-color: var(--card-pink);
@@ -76,7 +76,7 @@ body {
 .stat-info .count { display: block; font-size: 28px; font-weight: 700; color: #111; }
 .stat-info .label { font-size: 10px; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; }
 
-/* --- 5. Wishlist Section --- */
+/* --- Wishlist Section --- */
 .wishlist-section, .orders-section { margin-bottom: 50px; }
 
 .section-header { 
@@ -97,7 +97,7 @@ body {
 
 .view-all { font-size: 11px; font-weight: 800; color: var(--maroon); text-decoration: none; text-transform: uppercase; }
 
-/* --- 6. Product Grid (Uniform Sizing) --- */
+/* --- Product Grid--- */
 .product-grid { 
     display: grid; 
     grid-template-columns: repeat(4, 1fr); 
@@ -130,7 +130,7 @@ body {
 .product-item h3 { font-size: 11px; font-weight: 600; margin-top: 10px; color: #333; }
 .product-item .price { font-size: 12px; font-weight: 800; color: var(--maroon); margin-top: 5px; }
 
-/* --- 7. Profile Card (Fixing the Sidebar Links) --- */
+/* ---Profile Card  --- */
 .profile-card {
     background: #FDFDFB;
     border: 1px solid var(--border-light);
@@ -216,7 +216,7 @@ body {
 
 .action-btn { text-decoration: none; color: var(--maroon); font-weight: 700; font-size: 11px; }
 
-/* --- 9. Promo Banner --- */
+/* ---Promo Banner --- */
 .promo-banner { 
     margin-top: 60px; 
     width: 100%;
