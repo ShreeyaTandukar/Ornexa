@@ -1,50 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ taglib prefix="fn"  uri="jakarta.tags.functions" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%
-	String itemNamesStr  = request.getParameter("itemNames");
-	String itemQtysStr   = request.getParameter("itemQtys");
-	String itemPricesStr = request.getParameter("itemPrices");
-	String itemImgsStr   = request.getParameter("itemImgs");
-
-	String[] itemNames  = (itemNamesStr  != null && !itemNamesStr.isEmpty())
-						  ? itemNamesStr.split("\\|")  : new String[0];
-	String[] itemQtys   = (itemQtysStr   != null && !itemQtysStr.isEmpty())
-						  ? itemQtysStr.split("\\|")   : new String[0];
-	String[] itemPrices = (itemPricesStr != null && !itemPricesStr.isEmpty())
-						  ? itemPricesStr.split("\\|") : new String[0];
-	String[] itemImgs   = (itemImgsStr   != null && !itemImgsStr.isEmpty())
-						  ? itemImgsStr.split("\\|")   : new String[0];
-
-	// Calculate subtotal from selected items
-	double subtotal = 0;
-	String productName = request.getParameter("productName");
-	String priceParam  = request.getParameter("price");
-	String qtyParam    = request.getParameter("quantity");
-
-	if (productName != null && !productName.isEmpty()) {
-		double price = (priceParam != null && !priceParam.isEmpty())
-					   ? Double.parseDouble(priceParam) : 0;
-		int qty      = (qtyParam  != null && !qtyParam.isEmpty())
-					   ? Integer.parseInt(qtyParam) : 1;
-		subtotal = price * qty;
-	} else {
-		String cartTotalParam = request.getParameter("cartTotal");
-		subtotal = (cartTotalParam != null && !cartTotalParam.isEmpty())
-				   ? Double.parseDouble(cartTotalParam) : 0;
-	}
-
-	double shipping = 100;
-	double total    = subtotal + shipping;
-
-	request.setAttribute("itemNames",  itemNames);
-	request.setAttribute("itemQtys",   itemQtys);
-	request.setAttribute("itemPrices", itemPrices);
-	request.setAttribute("itemImgs",   itemImgs);
-	request.setAttribute("subtotal",   subtotal);
-	request.setAttribute("total",      total);
-%>
+<%@ taglib prefix="c"   uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +14,7 @@
 
 <main class="payment-container">
 
-	<%-- ── Success Message ── --%>
+	<%-- success message after order placed --%>
 	<c:if test="${param.status == 'success'}">
 		<div class="success-box">
 			<i>&#10003;</i>
@@ -69,14 +26,14 @@
 		</div>
 	</c:if>
 
-	<%-- ── Payment Page ── --%>
+	<%-- payment page shown when no status param --%>
 	<c:if test="${empty param.status}">
 
 		<div class="back-row">
 			<a href="javascript:history.back()" class="back-btn">&#8592;</a>
 		</div>
 
-		<%-- ── Address Section ── --%>
+		<%-- address section --%>
 		<div class="address-section">
 			<div class="address-left">
 				<span class="location-icon">&#128205;</span>
@@ -96,47 +53,48 @@
 			</div>
 
 			<form action="${pageContext.request.contextPath}/payment" method="get">
-			    <input type="hidden" name="cartId" value="${param.cartId}"/>
-			    <input type="hidden" name="cartTotal" value="${param.cartTotal}"/>
-			    <input type="hidden" name="itemNames" value="${param.itemNames}"/>
-			    <input type="hidden" name="itemQtys" value="${param.itemQtys}"/>
-			    <input type="hidden" name="itemPrices" value="${param.itemPrices}"/>
-			    <input type="hidden" name="itemImgs" value="${param.itemImgs}"/>
-			    <input type="hidden" name="productName" value="${param.productName}"/>
-			    <input type="hidden" name="price" value="${param.price}"/>
-			    <input type="hidden" name="quantity" value="${param.quantity}"/>
-			    <input type="hidden" name="source" value="${param.source}"/>
-			    <input type="hidden" name="imgUrl" value="${param.imgUrl}"/>
-			    <input type="hidden" name="showAddress" value="true"/>
-			    <button type="submit" class="edit-btn">EDIT</button>
+				<input type="hidden" name="cartId"      value="${param.cartId}"/>
+				<input type="hidden" name="cartTotal"   value="${param.cartTotal}"/>
+				<input type="hidden" name="itemNames"   value="${param.itemNames}"/>
+				<input type="hidden" name="itemQtys"    value="${param.itemQtys}"/>
+				<input type="hidden" name="itemPrices"  value="${param.itemPrices}"/>
+				<input type="hidden" name="itemImgs"    value="${param.itemImgs}"/>
+				<input type="hidden" name="productName" value="${param.productName}"/>
+				<input type="hidden" name="price"       value="${param.price}"/>
+				<input type="hidden" name="quantity"    value="${param.quantity}"/>
+				<input type="hidden" name="source"      value="${param.source}"/>
+				<input type="hidden" name="imgUrl"      value="${param.imgUrl}"/>
+				<input type="hidden" name="showAddress" value="true"/>
+				<button type="submit" class="edit-btn">EDIT</button>
 			</form>
 		</div>
 
+		<%-- address input shown when showAddress=true --%>
 		<c:if test="${param.showAddress == 'true'}">
 			<form action="${pageContext.request.contextPath}/payment" method="get"
-			      class="address-edit-box">
-			    <input type="hidden" name="cartId" value="${param.cartId}"/>
-			    <input type="hidden" name="cartTotal" value="${param.cartTotal}"/>
-			    <input type="hidden" name="itemNames" value="${param.itemNames}"/>
-			    <input type="hidden" name="itemQtys" value="${param.itemQtys}"/>
-			    <input type="hidden" name="itemPrices" value="${param.itemPrices}"/>
-			    <input type="hidden" name="itemImgs" value="${param.itemImgs}"/>
-			    <input type="hidden" name="productName" value="${param.productName}"/>
-			    <input type="hidden" name="price" value="${param.price}"/>
-			    <input type="hidden" name="quantity" value="${param.quantity}"/>
-			    <input type="hidden" name="source" value="${param.source}"/>
-			    <input type="hidden" name="imgUrl" value="${param.imgUrl}"/>
-			    <input type="text"   name="savedAddress"
-			           placeholder="Enter your full delivery address"
-			           value="${param.savedAddress}" required/>
-			    <button type="submit">Save</button>
+				  class="address-edit-box">
+				<input type="hidden" name="cartId"      value="${param.cartId}"/>
+				<input type="hidden" name="cartTotal"   value="${param.cartTotal}"/>
+				<input type="hidden" name="itemNames"   value="${param.itemNames}"/>
+				<input type="hidden" name="itemQtys"    value="${param.itemQtys}"/>
+				<input type="hidden" name="itemPrices"  value="${param.itemPrices}"/>
+				<input type="hidden" name="itemImgs"    value="${param.itemImgs}"/>
+				<input type="hidden" name="productName" value="${param.productName}"/>
+				<input type="hidden" name="price"       value="${param.price}"/>
+				<input type="hidden" name="quantity"    value="${param.quantity}"/>
+				<input type="hidden" name="source"      value="${param.source}"/>
+				<input type="hidden" name="imgUrl"      value="${param.imgUrl}"/>
+				<input type="text"   name="savedAddress"
+					   placeholder="Enter your full delivery address"
+					   value="${param.savedAddress}" required/>
+				<button type="submit">Save</button>
 			</form>
 		</c:if>
 
-		<%-- ── Product Cards ── --%>
+		<%-- product cards --%>
 		<c:choose>
 
-			<%-- Buy Now — single product with +/- qty using forms --%>
+			<%-- buy now - single product --%>
 			<c:when test="${not empty param.productName}">
 				<div class="product-card">
 					<div class="product-card-top">
@@ -152,42 +110,36 @@
 					</div>
 					<div class="qty-row">
 						<p class="delivery-tag">&#128666; Guaranteed within 2-3 days</p>
-
-						<%-- Decrease qty form --%>
 						<div class="qty-box">
 							<form action="${pageContext.request.contextPath}/payment" method="get">
-								<input type="hidden" name="cartId" value="${param.cartId}"/>
-								<input type="hidden" name="source" value="${param.source}"/>
-								<input type="hidden" name="productName" value="${param.productName}"/>
-								<input type="hidden" name="price" value="${param.price}"/>
-								<input type="hidden" name="imgUrl" value="${param.imgUrl}"/>
+								<input type="hidden" name="cartId"       value="${param.cartId}"/>
+								<input type="hidden" name="source"       value="${param.source}"/>
+								<input type="hidden" name="productName"  value="${param.productName}"/>
+								<input type="hidden" name="price"        value="${param.price}"/>
+								<input type="hidden" name="imgUrl"       value="${param.imgUrl}"/>
 								<input type="hidden" name="savedAddress" value="${param.savedAddress}"/>
 								<input type="hidden" name="quantity"
 									   value="${param.quantity > 1 ? param.quantity - 1 : 1}"/>
 								<button type="submit" class="qty-btn">&#8722;</button>
 							</form>
-
 							<span class="qty-display">${param.quantity}</span>
-
-							<%-- Increase qty form --%>
 							<form action="${pageContext.request.contextPath}/payment" method="get">
-								<input type="hidden" name="cartId" value="${param.cartId}"/>
-								<input type="hidden" name="source" value="${param.source}"/>
-								<input type="hidden" name="productName" value="${param.productName}"/>
-								<input type="hidden" name="price" value="${param.price}"/>
-								<input type="hidden" name="imgUrl" value="${param.imgUrl}"/>
+								<input type="hidden" name="cartId"       value="${param.cartId}"/>
+								<input type="hidden" name="source"       value="${param.source}"/>
+								<input type="hidden" name="productName"  value="${param.productName}"/>
+								<input type="hidden" name="price"        value="${param.price}"/>
+								<input type="hidden" name="imgUrl"       value="${param.imgUrl}"/>
 								<input type="hidden" name="savedAddress" value="${param.savedAddress}"/>
 								<input type="hidden" name="quantity"
 									   value="${param.quantity + 1}"/>
 								<button type="submit" class="qty-btn">&#43;</button>
 							</form>
 						</div>
-
 					</div>
 				</div>
 			</c:when>
 
-			<%-- Cart Checkout — one card per selected item --%>
+			<%-- cart checkout - one card per selected item --%>
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${fn:length(itemNames) > 0}">
@@ -232,7 +184,7 @@
 
 		</c:choose>
 
-		<%-- ── Order Detail ── --%>
+		<%-- order detail section --%>
 		<div class="order-detail">
 			<h3>Order Detail</h3>
 
@@ -259,20 +211,20 @@
 			</div>
 		</div>
 
-		<%-- ── Confirm Form ── --%>
+		<%-- confirm form --%>
 		<form action="${pageContext.request.contextPath}/payment"
 			  method="post" id="confirmForm">
-			<input type="hidden" name="cartId" value="${param.cartId}"/>
-			<input type="hidden" name="cartTotal" value="${param.cartTotal}"/>
-			<input type="hidden" name="itemNames" value="${param.itemNames}"/>
-			<input type="hidden" name="itemQtys" value="${param.itemQtys}"/>
-			<input type="hidden" name="itemPrices" value="${param.itemPrices}"/>
-			<input type="hidden" name="itemImgs" value="${param.itemImgs}"/>
-			<input type="hidden" name="productName" value="${param.productName}"/>
-			<input type="hidden" name="price" value="${param.price}"/>
-			<input type="hidden" name="quantity" value="${param.quantity}"/>
-			<input type="hidden" name="source" value="${param.source}"/>
-			<input type="hidden" name="destination" value="${param.savedAddress}"/>
+			<input type="hidden" name="cartId"        value="${param.cartId}"/>
+			<input type="hidden" name="cartTotal"     value="${param.cartTotal}"/>
+			<input type="hidden" name="itemNames"     value="${param.itemNames}"/>
+			<input type="hidden" name="itemQtys"      value="${param.itemQtys}"/>
+			<input type="hidden" name="itemPrices"    value="${param.itemPrices}"/>
+			<input type="hidden" name="itemImgs"      value="${param.itemImgs}"/>
+			<input type="hidden" name="productName"   value="${param.productName}"/>
+			<input type="hidden" name="price"         value="${param.price}"/>
+			<input type="hidden" name="quantity"      value="${param.quantity}"/>
+			<input type="hidden" name="source"        value="${param.source}"/>
+			<input type="hidden" name="destination"   value="${param.savedAddress}"/>
 			<input type="hidden" name="paymentMethod" value="Cash on Delivery"/>
 
 			<div class="confirm-row">
