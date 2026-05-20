@@ -106,7 +106,7 @@
                         <!-- ADD TO CART -->
                         <td>
 
-                            <form action="${pageContext.request.contextPath}/cart"
+                            <form action="${pageContext.request.contextPath}/CartServlet"
                                   method="post">
 
                                 <input type="hidden" name="productId" value="${item.productId}" />
@@ -148,7 +148,6 @@
 </section>
 
 <!-- FOOTER -->
-<jsp:include page="footer.jsp" />
-
+<jsp:include page="/WEB-INF/pages/Users/footer.jsp" />
 </body>
 </html>
