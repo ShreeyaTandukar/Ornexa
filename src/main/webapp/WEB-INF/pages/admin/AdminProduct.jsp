@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>Admin Product</title>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/AdminProduct.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminProduct.css">
 </head>
 
 <body>
