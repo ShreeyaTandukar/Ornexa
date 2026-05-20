@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* --- 1. Global Reset & Variables --- */
+/* --- Global Reset & Variables --- */
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +31,7 @@ body {
 
 
 
-/* --- 4. Main Content Area --- */
+/* --- Main Content Area --- */
 .main-content {
     flex-grow: 1; /* Fills remaining width */
     padding: 60px 80px;
@@ -83,7 +83,7 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* --- 5. Filters Container --- */
+/* --- Filters Container --- */
 .filters-container {
     background-color: #F0E9E9;
     padding: 30px 45px;
@@ -128,7 +128,7 @@ body {
     gap: 8px;
 }
 
-/* --- 6. Table Styling --- */
+/* --- Table Styling --- */
 .inventory-table {
     width: 100%;
     border-collapse: collapse;
@@ -261,9 +261,7 @@ body {
 .text-right { text-align: right; }
 
 
-/* =========================
-   MODAL BACKGROUND
-========================= */
+/* MODAL BACKGROUND*/
 .modal {
     display: none;
     position: fixed;
@@ -280,9 +278,7 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* =========================
-   MODAL BOX
-========================= */
+/*MODAL BOX*/
 .modal-content {
     background: #ffffff;
     width: 420px;
@@ -306,9 +302,7 @@ body {
     }
 }
 
-/* =========================
-   CLOSE BUTTON
-========================= */
+/* CLOSE BUTTON*/
 .close {
     float: right;
     font-size: 22px;
@@ -316,9 +310,7 @@ body {
     font-weight: bold;
 }
 
-/* =========================
-   INPUT FIELDS
-========================= */
+/*INPUT FIELDS*/
 .modal-content input {
     width: 100%;
     padding: 10px;
@@ -332,9 +324,7 @@ body {
     border-color: #5D262B;
 }
 
-/* =========================
-   BUTTON INSIDE MODAL
-========================= */
+/* BUTTON INSIDE MODAL */
 .modal-content button {
     width: 100%;
     padding: 10px;
