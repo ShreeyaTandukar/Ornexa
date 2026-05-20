@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Home</title>
 
-<!-- CSS -->
+
 <link rel="stylesheet"
       href="${pageContext.request.contextPath}/css/home_page.css">
       </head>
