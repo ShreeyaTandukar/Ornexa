@@ -29,7 +29,7 @@ body {
 }
 
 
-/* --- 4. Main Content Area --- */
+/*Main Content Area  */
 .main-content {
     flex: 1;
     padding: 60px 80px;
@@ -82,7 +82,7 @@ body {
 
 .growth { color: #2ecc71; }
 
-/* --- 5. Toolbars & Table --- */
+/* Toolbars & Table  */
 .action-bar {
     background: #EDDEDC;
     padding: 10px 20px;
@@ -177,8 +177,14 @@ body {
     background: #EFEFE9;
 }
 
-.c-text strong { display: block; font-size: 14px; }
-.c-text p { font-size: 11px; color: var(--text-muted); }
+.c-text strong { 
+    display: block;
+    font-size: 14px; 
+}
+.c-text p { 
+    font-size: 11px;
+    color: var(--text-muted); 
+}
 
 /* Status Badges */
 .status-dropdown {
@@ -223,7 +229,7 @@ body {
     font-size: 11px; 
 }
 
-/* --- 6. Pagination Footer --- */
+/*  Pagination Footer */
 .table-footer {
     display: flex;
     justify-content: space-between;
