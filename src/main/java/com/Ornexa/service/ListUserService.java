@@ -6,7 +6,7 @@ import com.Ornexa.model.User;
 
 public class ListUserService {
     
-    // Create the DAO once at the top
+    
     private UserDao dao = new UserDao();
     
     public List<User> getUsersByStatus(String status) throws Exception {
