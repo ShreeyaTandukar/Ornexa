@@ -10,6 +10,8 @@ import com.Ornexa.model.AdminProduct;
 import com.Ornexa.utils.DBconfig;
 
 public class AdminProductDao {
+	
+	//get all product detail method
 
     public List<AdminProduct> getAllProducts() throws Exception {
 
@@ -44,6 +46,8 @@ public class AdminProductDao {
         return list;
     }
 
+    //Inserting new product in database
+    
     public boolean insertProduct(AdminProduct p) throws Exception {
 
         String sql = "INSERT INTO product " +
@@ -68,11 +72,13 @@ public class AdminProductDao {
         }
     }
 
+    //Updating product details 
+    
     public boolean updateProduct(AdminProduct p) throws Exception {
 
         String sql = "UPDATE product SET " +
                 "Product_Name=?, Product_Price=?, Stock_Quantity=?, " +
-                "Material=?, product_description=?, img_url=?, " +
+                "Material=?, product_description=?, " +
                 "Category_Id=?, gender=?, style=? " +
                 "WHERE Product_Id=?";
 
@@ -84,16 +90,17 @@ public class AdminProductDao {
             ps.setInt(3, p.getStockQuantity());
             ps.setString(4, p.getMaterial());
             ps.setString(5, p.getDescription());
-            ps.setString(6, p.getImgUrl());
-            ps.setInt(7, p.getCategoryId());
-            ps.setString(8, p.getGender());
-            ps.setString(9, p.getStyle());
-            ps.setInt(10, p.getId());
+            ps.setInt(6, p.getCategoryId());
+            ps.setString(7, p.getGender());
+            ps.setString(8, p.getStyle());
+            ps.setInt(9, p.getId());
 
             return ps.executeUpdate() > 0;
         }
     }
 
+    // deleting products from database 
+    
     public boolean deleteProduct(int id) throws Exception {
 
         String sql = "DELETE FROM product WHERE Product_Id=?";
@@ -105,6 +112,8 @@ public class AdminProductDao {
             return ps.executeUpdate() > 0;
         }
     }
+    
+    //getting 1 specific product detail using ID
 
     public AdminProduct getProductById(int id) throws Exception {
 
@@ -137,6 +146,8 @@ public class AdminProductDao {
 
         return p;
     }
+    
+    // filtering product detail
 
     public List<AdminProduct> getFilteredProducts(String material, String style, String gender) throws Exception {
 

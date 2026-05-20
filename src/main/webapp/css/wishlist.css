@@ -1,0 +1,264 @@
+@charset "UTF-8";
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f7f5f3;
+    font-family: "Poppins", sans-serif;
+    color: #333;
+}
+
+
+.wishlist-container {
+    width: 95%;
+    margin: 70px auto;
+    min-height: 70vh;
+}
+
+
+.wishlist-title {
+    text-align: center;
+    font-size: 64px;
+    font-weight: 300;
+    color: #6f2630;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.wishlist-title::after {
+    content: "";
+    width: 70px;
+    height: 2px;
+    background: #e5dede;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -15px;
+}
+
+
+.wishlist-table-wrapper {
+    background: white;
+    overflow-x: auto;
+}
+
+
+.wishlist-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.wishlist-table thead {
+    background-color: #f2e7e7;
+}
+
+.wishlist-table thead th {
+    padding: 22px 10px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 500;
+    color: #7a7070;
+    text-transform: uppercase;
+}
+
+
+.wishlist-table tbody tr {
+    border-bottom: 1px solid #f1eeee;
+}
+
+.wishlist-table tbody td {
+    padding: 35px 15px;
+    vertical-align: middle;
+}
+
+
+.remove-item {
+    width: 50px;
+    text-align: center;
+}
+
+.remove-item form button {
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    color: #c7bebe;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.remove-item form button:hover {
+    color: #6f2630;
+    transform: scale(1.1);
+}
+
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.product-info img {
+    width: 95px;
+    height: 95px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.product-name {
+    font-size: 28px;
+    color: #222;
+    font-weight: 400;
+}
+
+
+.price {
+    font-size: 30px;
+    color: #6f2630;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ===== STOCK ===== */
+.stock-status {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.stock-status.in-stock {
+    color: #1e7d38;
+}
+
+.stock-status.low-stock {
+    color: #8c7c7c;
+}
+
+.stock-status.out-stock {
+    color: red;
+}
+
+
+.add-to-cart {
+    background-color: #6f2630;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #541b24;
+    transform: translateY(-2px);
+}
+
+.wishlist-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+}
+
+
+.continue-shopping {
+    text-decoration: none;
+    color: #5c5555;
+    letter-spacing: 3px;
+    font-size: 13px;
+    transition: 0.3s ease;
+}
+
+.continue-shopping:hover {
+    color: #6f2630;
+}
+
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.page-num {
+    width: 40px;
+    height: 40px;
+    background: #f0ecec;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    cursor: pointer;
+}
+
+.page-num.active {
+    background-color: #f2eeee;
+    color: #444;
+}
+
+.arrow {
+    font-size: 24px;
+    cursor: pointer;
+    color: #444;
+}
+
+
+@media (max-width: 992px) {
+
+    .wishlist-title {
+        font-size: 42px;
+    }
+
+    .product-name {
+        font-size: 20px;
+    }
+
+    .price {
+        font-size: 22px;
+    }
+
+    .wishlist-table tbody td {
+        padding: 25px 10px;
+    }
+
+    .add-to-cart {
+        padding: 12px 22px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .wishlist-table thead {
+        display: none;
+    }
+
+    .wishlist-table,
+    .wishlist-table tbody,
+    .wishlist-table tr,
+    .wishlist-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .wishlist-table tr {
+        margin-bottom: 25px;
+        background: white;
+        padding: 20px;
+    }
+
+    .product-info {
+        margin-bottom: 20px;
+    }
+
+    .wishlist-footer {
+        flex-direction: column;
+        gap: 25px;
+    }
+}

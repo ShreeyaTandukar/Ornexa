@@ -8,13 +8,15 @@ import com.Ornexa.model.OrderItem;
 
 public class OrderManagementService {
 
-    OrderDao dao = new OrderDao();
+    OrderDao dao = new OrderDao(); //DAO Object
     stockService stockService = new stockService();
 
+    // getting all order details
     public List<Order> getAllOrders() {
-        return dao.getAllOrdersA();
+        return dao.getAllOrders();
     }
 
+    //getting order according to filter
     public List<Order> getFilteredOrders(String status, String fromDate, String toDate) {
         return dao.getFilteredOrders(status, fromDate, toDate);
     }
@@ -38,11 +40,14 @@ public class OrderManagementService {
 
         return updated;
     }
+    
+    //Total revenue
 
     public double getTotalRevenue() {
         return dao.getTotalRevenue();
     }
 
+    //Calculation of growth percentage
     public double getGrowthPercent() {
 
         double thisMonth = dao.getMonthlyRevenue(0);
@@ -53,6 +58,7 @@ public class OrderManagementService {
         return ((thisMonth - lastMonth) / lastMonth) * 100;
     }
     
+    //Getting order detail with items
     public Order getOrderWithItems(int orderId) {
 
         Order order = dao.getSingleOrder(orderId);

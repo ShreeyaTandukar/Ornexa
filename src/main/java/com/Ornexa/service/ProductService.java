@@ -18,6 +18,9 @@ public class ProductService {
     public Product getProductById(int id) throws Exception {
         return productDao.getProductById(id);
     }
+    public List<Product> getCollectionProducts() throws Exception {
+        return productDao.getCollectionProducts();
+    }
     private ProductDao dao = new ProductDao();
 
     public boolean addProduct(Product p) {

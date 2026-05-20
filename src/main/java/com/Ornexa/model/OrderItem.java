@@ -9,9 +9,24 @@ public class OrderItem {
     private int orderId;
     private int paymentId;
     private int productId;
-
-    // optional if joining product table later
     private String productName;
+    
+    public OrderItem() { //default constructor
+ 
+    }
+    
+ 
+    //Constructor
+    public OrderItem(int quantity, double price, int orderId,
+            int paymentId, int productId, String productName) {
+
+		this.quantity = quantity;
+		this.price = price;
+		this.orderId = orderId;
+		this.paymentId = paymentId;
+		this.productId = productId;
+		this.productName = productName;
+		}
 
     // Getters and Setters
 

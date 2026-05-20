@@ -9,7 +9,7 @@ import com.Ornexa.utils.DBconfig;
 
 public class PaymentDao {
 
-	// Step 1 — insert into payment table, return new Payment_Id
+	// inserts into payment table and return the new payment id
 	public int insertPayment(String paymentMethod, double totalAmount) throws Exception {
 		Connection conn = DBconfig.getConnection();
 
@@ -25,19 +25,23 @@ public class PaymentDao {
 		if (keys.next()) {
 			paymentId = keys.getInt(1);
 		}
-
 		keys.close();
 		ps.close();
 		conn.close();
 		return paymentId;
 	}
 
-	// Step 2 — insert into order_table, return new Order_Id
+	// inserts into order_table and return the new order id
 	public int insertOrder(int userId, String destination, double totalAmount) throws Exception {
 		Connection conn = DBconfig.getConnection();
 
+		// if user did not enter address use a default value
+		if (destination == null || destination.trim().isEmpty()) {
+			destination = "Not provided";
+		}
+
 		String sql = "INSERT INTO order_table (Destination, Total_Amount, Order_Status, user_id) " +
-	             "VALUES (?, ?, 'placed', ?)";
+				"VALUES (?, ?, 'placed', ?)";
 		PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, destination);
 		ps.setDouble(2, totalAmount);
@@ -49,14 +53,13 @@ public class PaymentDao {
 		if (keys.next()) {
 			orderId = keys.getInt(1);
 		}
-
 		keys.close();
 		ps.close();
 		conn.close();
 		return orderId;
 	}
 
-	// Step 3 — insert each cart item into orderitem table
+	// inserts each item into orderitem table
 	public void insertOrderItem(int orderId, int paymentId, int productId,
 			int quantity, double price) throws Exception {
 		Connection conn = DBconfig.getConnection();
@@ -74,7 +77,7 @@ public class PaymentDao {
 		conn.close();
 	}
 
-	// Helper — get Product_Id from product name
+	// gets product id by name so we can insert into orderitem
 	public int getProductIdByName(String productName) throws Exception {
 		Connection conn = DBconfig.getConnection();
 
@@ -87,7 +90,6 @@ public class PaymentDao {
 		if (rs.next()) {
 			productId = rs.getInt("Product_Id");
 		}
-
 		rs.close();
 		ps.close();
 		conn.close();

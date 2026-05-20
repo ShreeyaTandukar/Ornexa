@@ -54,9 +54,9 @@ public class CartService {
 		}
 	}
 
-	public void closeCart(int cartId) {
+	public void closeCart(int cartId, int userId) {
 		try {
-			cartDao.closeCart(cartId);
+			cartDao.closeCart(cartId,userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
