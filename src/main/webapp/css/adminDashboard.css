@@ -20,7 +20,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- 2. Main Layout Structure --- */
+/* Main Layout Structure*/
 .admin-layout {
     display: flex; /* Creates side-by-side columns */
     width: 100%;
