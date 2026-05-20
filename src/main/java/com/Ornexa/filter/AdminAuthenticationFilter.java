@@ -29,19 +29,19 @@ public class AdminAuthenticationFilter implements Filter {
 
         User user = (User) SessionUtils.getAttribute(req, "user");
 
-        // 1. Not logged in
+        // Not logged in
         if (user == null) {
             res.sendRedirect(contextPath + "/loginServlet");
             return;
         }
 
-        // 2. Not admin
+        // Not admin
         if (!"admin".equalsIgnoreCase(user.getRole())) {
             res.sendRedirect(contextPath + "/Home_pageServlet");
             return;
         }
 
-        // 3. Allow admin
+        // Allow admin
         chain.doFilter(request, response);
     }
 }
