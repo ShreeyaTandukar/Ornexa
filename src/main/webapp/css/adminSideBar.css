@@ -178,9 +178,7 @@ body {
     }
 }
 
-/* =========================
-   CLOSE BUTTON
-========================= */
+/* CLOSE BUTTON*/
 .close {
     float: right;
     font-size: 22px;
@@ -188,9 +186,7 @@ body {
     font-weight: bold;
 }
 
-/* =========================
-   INPUT FIELDS
-========================= */
+/* INPUT FIELDS*/
 .modal-content input {
     width: 100%;
     padding: 10px;
@@ -204,9 +200,7 @@ body {
     border-color: #5D262B;
 }
 
-/* =========================
-   BUTTON INSIDE MODAL
-========================= */
+/*BUTTON INSIDE MODAL*/
 .modal-content button {
     width: 100%;
     padding: 10px;
