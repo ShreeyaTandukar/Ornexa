@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f5f2;
+    font-family: Arial, sans-serif;
+}
+
+.main-content {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.main-content h1 {
+    color: #8b5e3c;
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    color: #555;
+}
+
+.main-content a {
+    color: #8b5e3c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.main-content a:hover {
+    text-decoration: underline;
+}
