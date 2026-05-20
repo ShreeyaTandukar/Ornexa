@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 
-/* --- 1. Global Reset & Variables --- */
+/* Global Reset & Variables  */
 * {
     margin: 0;
     padding: 0;
@@ -23,14 +23,14 @@ body {
     min-height: 100vh;
 }
 
-/* --- 2. Main Layout Structure --- */
+/*  Main Layout Structure */
 .admin-layout {
     display: flex; /* Creates side-by-side columns */
     width: 100%;
     align-items: stretch;
 }
 
-/* --- 3. Sidebar (Fixed to Column) --- */
+/*Sidebar */
 .sidebar {
     width: 260px;
     background: var(--sidebar-white);
@@ -137,7 +137,7 @@ body {
     cursor: pointer;
 }
 
-/* --- 4. Main Content Area --- */
+/*  Main Content Area*/
 .main-content {
     flex-grow: 1; /* Fills remaining width */
     padding: 60px 80px;
@@ -189,7 +189,7 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* --- 5. Filters Container --- */
+/* Filters Container*/
 .filters-container {
     background-color: #F0E9E9;
     padding: 30px 45px;
@@ -328,7 +328,7 @@ body {
     margin-left: 8px;
 }
 
-/* --- 7. Table Footer --- */
+/* Table Footer */
 .table-footer {
     display: flex;
     justify-content: space-between;
