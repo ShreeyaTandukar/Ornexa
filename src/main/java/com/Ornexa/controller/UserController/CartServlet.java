@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.Ornexa.model.CartItem;
+import com.Ornexa.model.Product;
 import com.Ornexa.model.User;
 import com.Ornexa.service.CartService;
 
@@ -69,10 +70,29 @@ public class CartServlet extends HttpServlet {
 
 		// add a new item to cart
 		if (action.equals("add")) {
-			String productName = request.getParameter("productName");
-			double price = Double.parseDouble(request.getParameter("price"));
-			int cartId = cartService.getOrCreateCart(userId);
-			cartService.addItem(cartId, productName, price);
+
+		    int productId = Integer.parseInt(request.getParameter("productId"));
+
+		    int cartId = cartService.getOrCreateCart(userId);
+
+		    try {
+		        Product product = cartService.getProductById(productId);
+
+		        if (product == null) {
+		            response.sendRedirect(request.getContextPath() + "/CartServlet");
+		            return;
+		        }
+
+		        String productName = product.getName();
+		        double price = product.getPrice();
+
+		        cartService.addItem(cartId, productName, price);
+
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        response.sendRedirect(request.getContextPath() + "/CartServlet");
+		    }
+		
 
 		// update quantity when user clicks + or -
 		} else if (action.equals("update")) {

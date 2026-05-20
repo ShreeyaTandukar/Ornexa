@@ -1,12 +1,17 @@
+
 package com.Ornexa.service;
 
 import java.util.List;
 
 import com.Ornexa.dao.CartDao;
+import com.Ornexa.dao.ProductDao;
 import com.Ornexa.model.CartItem;
+import com.Ornexa.model.Product;
 
 public class CartService {
 	CartDao cartDao = new CartDao();
+	
+	ProductDao productDao = new ProductDao();
 
 	public int getOrCreateCart(int userId) {
 		try {
@@ -73,4 +78,12 @@ public class CartService {
 		return total;
 	}
 
+	public Product getProductById(int productId) {
+	    try {
+	        return productDao.getProductById(productId);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 }
