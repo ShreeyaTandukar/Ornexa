@@ -95,7 +95,7 @@ body:has(.memberCard:hover) .pageBlur {
     z-index: 100; /* Brings the active card in front of the blur */
 }
 
-/* --- 5. IMAGE & POPUP --- */
+/*  IMAGE & POPUP  */
 .memberPhoto {
     width: 175px;
     height: 175px;
