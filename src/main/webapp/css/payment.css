@@ -1,277 +1,302 @@
-<<<<<<< HEAD
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #fff;
-    color: #333;
+	font-family: Arial, sans-serif;
+	background: #f7f3ee;
+	color: #222;
 }
 
-.checkout-container {
-    width: 80%;
-    margin: 30px auto;
+.payment-container {
+	max-width: 860px;
+	margin: 30px auto;
+	padding: 0 20px 60px;
 }
 
-/* User Info */
-.user-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #fafafa;
-    border: 1px solid #ccc;
-    padding: 15px 20px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-}
-.user-info .username { font-weight: bold; color: #5a1a1a; }
-.user-info .address { color: #555; }
-.user-info .edit-link { color: #5a1a1a; font-weight: bold; text-decoration: none; }
-.user-info .edit-link:hover { text-decoration: underline; }
-
-/* Product Card Box */
-.product-card {
-    background: #722F37;   /* full maroon */
-    color: #fff;           /* white text */
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle shadow */
-}
-
-.product-card h2 {
-    margin: 0 0 10px;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.price {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 5px 0;
-}
-
-.policy, .delivery {
-    font-size: 14px;
-    margin: 4px 0;
-}
-
-/* Quantity Selector */
-.quantity-selector {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.qty-btn {
-    background: #fff;
-    color: #5a1a1a;
-    border: none;
-    padding: 6px 12px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.qty-btn:hover {
-    background: #ddd;
-}
-
-.quantity-selector input {
-    width: 40px;
-    text-align: center;
-    margin: 0 8px;
-    border: none;
-    background: #fff;
-    color: #5a1a1a;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
-/* Order Detail */
-.order-detail {
-    border: 1px solid #ccc;
-    padding: 25px;
-    border-radius: 6px;
-    background: #fafafa;
-    margin-top: 20px;
-}
-.order-detail h3 {
-    margin: 0 0 15px;
-    font-size: 20px;
-    color: #5a1a1a;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 8px;
-}
-.order-detail table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-.order-detail td { padding: 10px 0; font-size: 16px; color: #333; }
-.order-detail td:first-child { text-align: left; }
-.order-detail td:last-child { text-align: right; }
-.order-detail tr.divider td { border-bottom: 1px solid #ddd; padding-bottom: 12px; }
-.order-detail tr.total td { font-weight: bold; font-size: 18px; color: #000; padding-top: 12px; }
-
-/* Button aligned right */
-.btn {
-    background: #5a1a1a;
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 16px;
-    float: right;
-}
-.btn:hover { background: #7a2a2a; }
-/* Container Layout */
-.checkout-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.checkout-header {
-    margin-bottom: 20px;
+.back-row {
+	margin-bottom: 16px;
 }
 
 .back-btn {
-    text-decoration: none;
-    font-size: 24px;
-    color: #000;
+	text-decoration: none;
+	font-size: 22px;
+	color: #222;
 }
 
-/* Address Styling */
+/* ── Address Section ── */
 .address-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #000;
-    padding-bottom: 15px;
-    margin-bottom: 30px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 16px 0;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 10px;
 }
 
-.address-info {
-    display: flex;
-    gap: 15px;
-    align-items: center;
+.address-left {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
 }
 
 .location-icon {
-    font-size: 24px;
+	font-size: 20px;
+	margin-top: 2px;
 }
 
-.edit-link {
-    font-weight: bold;
-    color: #000;
-    text-decoration: none;
+.address-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 }
 
-/* Maroon Product Card */
+.address-name {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.address-text {
+	font-size: 14px;
+	color: #555;
+}
+
+.edit-btn {
+	background: none;
+	border: none;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+	color: #222;
+}
+
+.edit-btn:hover {
+	color: #7a3036;
+}
+
+/* ── Address Edit Box ── */
+.address-edit-box {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 16px;
+	padding: 12px;
+	background: white;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.address-edit-box input {
+	flex-grow: 1;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	outline: none;
+}
+
+.address-edit-box input:focus {
+	border-color: #7a3036;
+}
+
+.address-edit-box button {
+	background: #7a3036;
+	color: white;
+	border: none;
+	padding: 8px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+/* ── Product Card ── */
 .product-card {
-    background-color: #7a3036;
-    color: white;
-    padding: 25px;
-    border-radius: 5px;
-    margin-bottom: 40px;
+	background: #7a3036;
+	color: white;
+	border-radius: 6px;
+	padding: 20px;
+	margin-bottom: 16px;
 }
 
-.product-info-top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.product-card-top {
+	display: flex;
+	align-items: center;
+	gap: 16px;
 }
 
-.product-img {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 3px;
+.product-card-top img {
+	width: 110px;
+	height: 90px;
+	object-fit: cover;
+	border-radius: 4px;
+	flex-shrink: 0;
 }
 
-.product-text h2 {
-    margin: 0 0 10px 0;
-    font-size: 1.8rem;
+.product-card-info {
+	flex-grow: 1;
 }
 
-.price-val {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: right;
+.product-card-info h2 {
+	font-size: 1.3rem;
+	margin-bottom: 6px;
 }
 
-/* Fix for the Quantity Box */
-.quantity-box {
-    display: inline-flex;
-    align-items: center;
-    background-color: white;
-    padding: 5px;
-    border-radius: 8px;
-    gap: 10px;
-    float: right;
+.exchange-tag {
+	font-size: 14px;
+	color: #f0d0d0;
+}
+
+.product-price {
+	font-size: 1.3rem;
+	font-weight: bold;
+	text-decoration: underline;
+	flex-shrink: 0;
+}
+
+/* ── Qty Row ── */
+.qty-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+
+.delivery-tag {
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+}
+
+.qty-label {
+	font-size: 14px;
+	color: white;
+}
+
+.qty-box {
+	display: flex;
+	align-items: center;
+	background: white;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.qty-box form {
+	display: contents;
 }
 
 .qty-btn {
-    width: 25px;
-    height: 35px;
-    background-color: #f0f0f0;
-    border: 1px solid #999;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
+	width: 34px;
+	height: 34px;
+	background: #f0f0f0;
+	border: none;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #333;
 }
 
-#qty-number {
-    color: black;
-    font-weight: bold;
-    font-size: 1.2rem;
+.qty-btn:hover {
+	background: #7a3036;
+	color: white;
 }
 
-.product-guarantee {
-    font-weight: bold;
-    font-size: 1.1rem;
+.qty-display {
+	width: 40px;
+	height: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	font-weight: bold;
+	color: #333;
+	background: white;
 }
 
-/* Order Details */
-.order-details h3 {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
+/* ── Order Detail ── */
+.order-detail {
+	padding: 24px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+.order-detail h3 {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
 
 .detail-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-weight: bold;
-    font-size: 1.1rem;
+	display: flex;
+	justify-content: space-between;
+	font-size: 15px;
+	margin-bottom: 14px;
 }
 
-.divider {
-    border: 0;
-    border-top: 2px solid #000;
-    margin: 15px 0;
+.detail-divider {
+	border-top: 1px solid #ccc;
+	margin: 14px 0;
 }
 
 .total-row {
-    font-size: 1.3rem;
+	font-size: 16px;
+	font-weight: bold;
 }
 
-/* Proceed Button */
-.action-container {
-    text-align: right;
-    margin-top: 30px;
+/* ── Confirm Button ── */
+.confirm-row {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
 }
 
-.proceed-btn {
-    background-color: #7a3036;
-    color: white;
-    border: none;
-    padding: 12px 40px;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: 0.3s;
+.confirm-btn {
+	background: #7a3036;
+	color: white;
+	border: none;
+	padding: 14px 60px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 30px;
+	cursor: pointer;
 }
 
-.proceed-btn:hover {
-    background-color: #5a2328;
+.confirm-btn:hover {
+	background: #5e2229;
 }
 
+/* ── Success Box ── */
+.success-box {
+	text-align: center;
+	padding: 60px 20px;
+}
+
+.success-box i {
+	font-size: 60px;
+	color: #7a3036;
+	font-style: normal;
+}
+
+.success-box h2 {
+	font-size: 26px;
+	margin: 20px 0 10px;
+}
+
+.success-box p {
+	font-size: 16px;
+	color: #555;
+	margin-bottom: 30px;
+}
+
+.continue-btn {
+	background: #7a3036;
+	color: white;
+	text-decoration: none;
+	padding: 12px 36px;
+	border-radius: 30px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.continue-btn:hover {
+	background: #5e2229;
+}

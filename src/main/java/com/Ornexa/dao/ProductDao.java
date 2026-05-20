@@ -145,6 +145,41 @@ public class ProductDao {
 
 		    return null;
 		}
+		public List<Product> getCollectionProducts() throws Exception {
+
+	        Connection conn = DBconfig.getConnection();
+
+	        String sql = "SELECT product_id, product_name, product_price, " +
+	                "product_description, img_url " +
+	                "FROM (SELECT * FROM product " +
+	                "ORDER BY product_id DESC LIMIT 5) AS latest_products " +
+	                "ORDER BY product_id ASC";
+	        		
+	        PreparedStatement ps = conn.prepareStatement(sql);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        List<Product> collectionProducts = new ArrayList<>();
+
+	        while (rs.next()) {
+
+	            Product p = new Product();
+
+	            p.setId(rs.getInt("product_id"));
+	            p.setName(rs.getString("product_name"));
+	            p.setPrice(rs.getDouble("product_price"));
+	            p.setDescription(rs.getString("product_description"));
+	            p.setImgUrl(rs.getString("img_url"));
+
+	            collectionProducts.add(p);
+	        }
+
+	        rs.close();
+	        ps.close();
+	        conn.close();
+
+	        return collectionProducts;
+	    }
 		public boolean insertProduct(Product p) throws Exception {
 
 		    Connection conn = DBconfig.getConnection();

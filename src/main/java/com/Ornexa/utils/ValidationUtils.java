@@ -111,5 +111,64 @@ public class ValidationUtils {
 					
 					return null;
 					}
+ 
+    
+    public static String validateProduct(String name,
+            String price,
+            String stock,
+            String categoryId,
+            String material,
+            String gender,
+            String style) {
+
+				if (name == null || name.trim().isEmpty() ||
+				price == null || price.trim().isEmpty() ||
+				stock == null || stock.trim().isEmpty() ||
+				categoryId == null || categoryId.trim().isEmpty() ||
+				material == null || material.trim().isEmpty() ||
+				gender == null || gender.trim().isEmpty() ||
+				style == null || style.trim().isEmpty()) {
+				
+				return "Please fill all required fields.";
+				}
+				
+				
+				try {
+				double p = Double.parseDouble(price);
+				
+				if (p <= 0) {
+				return "Price must be greater than 0.";
+				}
+				
+				} catch (Exception e) {
+				return "Invalid price.";
+				}
+			
+				try {
+				int s = Integer.parseInt(stock);
+				
+				if (s < 0) {
+				return "Stock cannot be negative.";
+				}
+				
+				} catch (Exception e) {
+				return "Stock must be a valid integer.";
+				}
+				
+			
+				try {
+				int cat = Integer.parseInt(categoryId);
+				
+				if (cat <= 0) {
+				return "Invalid category.";
+				}
+				
+				} catch (Exception e) {
+				return "Category ID must be a valid integer.";
+				}
+				
+				return null; 
+				}
+
 					   
 }

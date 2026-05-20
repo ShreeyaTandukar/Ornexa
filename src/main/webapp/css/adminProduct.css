@@ -275,6 +275,11 @@ body {
     z-index: 9999;
 }
 
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* =========================
    MODAL BOX
 ========================= */
@@ -286,6 +291,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     animation: pop 0.25s ease-in-out;
+    
 }
 
 /* animation */
