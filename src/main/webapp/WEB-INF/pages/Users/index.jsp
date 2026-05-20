@@ -161,7 +161,7 @@
                     </div>
                 </div>
 
-                <!-- SMALL IMAGES (MATCHING YOUR CSS) -->
+                <!-- SMALL IMAGES -->
                 <div class="small_img">
 
                     <div class="imagee">
