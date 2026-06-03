@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,51 +24,42 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="remove-item"><span>&times;</span></td>
-                    <td class="product-info">
-                        <img src="../picture/kali.png" alt="Kalli">
-                        <span class="product-name">Kalli</span>
-                    </td>
-                    <td class="price">Rs.15,000</td>
-                    <td class="stock-status in-stock">● IN STOCK</td>
-                    <td>
-                        <a href="cart.jsp">
-                            <button class="add-to-cart">ADD TO CART</button>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="remove-item"><span>&times;</span></td>
-                    <td class="product-info">
-                        <img src="../picture/braclet-men.png" alt="Bracelet">
-                        <span class="product-name">Engraved Curb Link Bracelet</span>
-                    </td>
-                    <td class="price">Rs.8,000</td>
-                    <td class="stock-status in-stock">● IN STOCK</td>
-                    <td>
-                        <a href="cart.jsp">
-                            <button class="add-to-cart">ADD TO CART</button>
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="remove-item"><span>&times;</span></td>
-                    <td class="product-info">
-                        <img src="men.jpeg" alt="Necklace">
-                        <span class="product-name">Engraved Round Men's Necklace</span>
-                    </td>
-                    <td class="price">
-                        Rs. 6,500 <br>
-                        <small style="text-decoration: line-through; color: #999;">Rs. 13,000</small>
-                    </td>
-                    <td class="stock-status low-stock">● LOW STOCK</td>
-                    <td>
-                        <a href="cart.jsp">
-                            <button class="add-to-cart">ADD TO CART</button>
-                        </a>
-                    </td>
-                </tr>
+                <!-- Dynamic loop for wishlist items -->
+                <c:forEach var="item" items="${wishlistItems}">
+                    <tr>
+                        <!-- Remove item -->
+                        <td class="remove-item">
+                            <form action="WishListServlet" method="post">
+                                <input type="hidden" name="productId" value="${item.id}" />
+                                <input type="hidden" name="action" value="remove" />
+                                <button type="submit">&times;</button>
+                            </form>
+                        </td>
+                        
+                        <!-- Product info -->
+                        <td class="product-info">
+                            <img src="${item.imageUrl}" alt="${item.name}">
+                            <span class="product-name">${item.name}</span>
+                        </td>
+                        
+                        <!-- Price -->
+                        <td class="price">Rs. ${item.price}</td>
+                        
+                        <!-- Stock status -->
+                        <td class="stock-status ${item.stockStatus}">
+                            ● ${item.stockStatus}
+                        </td>
+                        
+                        <!-- Add to cart -->
+                        <td>
+                            <form action="CartServlet" method="post">
+                                <input type="hidden" name="productId" value="${item.id}" />
+                                <input type="hidden" name="action" value="add" />
+                                <button class="add-to-cart">ADD TO CART</button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>

@@ -34,9 +34,12 @@ public class ContactUsServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	        throws ServletException, IOException {
+	    // Here you would normally save the contact form data (DB, email, etc.)
+
+	    // Redirect back with a hash to trigger the modal
+	    response.sendRedirect(request.getContextPath() + "/ContactUsServlet#thankYouModal");
 	}
 
 }
